@@ -1,0 +1,33 @@
+:root {
+    --primary: #69BAE8;
+    --primary_dark: #5AA3CD;
+    --dark: #0C2828;
+    --black: #0D1617;
+    --black_5: rgba(0, 0, 0, .05);
+    --black_10: rgba(0, 0, 0, .1);
+    --black_15: rgba(0, 0, 0, .15);
+    --black_25: rgba(0, 0, 0, .25);
+    --black_50: rgba(0, 0, 0, .5);
+    --light: #F5F8FA;
+    --white: #FFFFFF;
+    --white_5: rgba(255, 255, 255, .05);
+    --white_10: rgba(255, 255, 255, .1);
+    --white_25: rgba(255, 255, 255, .25);
+    --white_50: rgba(255, 255, 255, .5);
+    --yellow: #F8CB6F;
+    --orange: #F2A486;
+    --red: #F48489;
+    --purple: #936EB0;
+    --blue: #7F90C6;
+    --green: #8AC97F;
+    --border-radius: 10px;
+    --border-radius-sm: 5px;
+    --border-lg: 3px solid rgba(0, 0, 0, .15);
+    --border-lg_colored: 3px solid #E5E5E5;
+    --border-sm_light: 1px solid rgba(255, 255, 255, .15);
+    --border-sm_dark: 1px solid rgba(0, 0, 0, .15);
+    --box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+    --transition-200: all 200ms ease-in-out;
+    --transition-300: all 200ms ease-in-out;
+    --transition-300_cubic: all 300ms cubic-bezier(.17, .67, .65, 1.34);
+}
