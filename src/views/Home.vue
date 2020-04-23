@@ -3,12 +3,12 @@
     <div
       class="section section--hero"
       id="home"
-      style="background-image: url('../assets/home_hero.jpg');"
+      :style="`background-image: url('${require('../assets/home_hero.jpg')}');`"
     >
       <div class="container">
         <div class="el-row">
           <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-12">
-            <h1>title</h1>
+            <h1>{{$t('message')}}</h1>
             <p>description</p>
           </div>
         </div>

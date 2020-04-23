@@ -1,0 +1,170 @@
+
+.section--hero {
+    height: calc(100vh - 380px);
+    background-position: center;
+    background-size: cover;
+    color: var(--white);
+    padding-top: 170px;
+    overflow: hidden;
+}
+
+.section--hero .container {
+    position: relative;
+    z-index: 5;
+}
+
+.section--hero .earth-wrapper {
+    position: absolute;
+    bottom: -250px;
+    right: -250px;
+    height: 1000px;
+    width: 1000px;
+}
+
+.section--hero .earth {
+    width: 100%;
+}
+
+.section--hero .hero-divider {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section--hero .hero-divider .divider {
+    width: 100%;
+}
+
+.section--hero .hero-divider .scroll-down {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    transition: var(--transition-200);
+}
+
+.section--hero .hero-divider .scroll-down span {
+    margin-bottom: 5px;
+    font-weight: 900;
+}
+
+.section--hero .hero-divider .scroll-down .caret {
+    animation: MoveUpDown 500ms alternate infinite;
+}
+
+.section--hero .hero-divider .scroll-down:hover {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1200px) {
+    .section--hero .hero-divider {
+        bottom: -10px;
+    }
+    .section--hero .hero-divider .scroll-down {
+        bottom: 40px;
+        opacity: 1;
+    }
+    .section--hero .earth-wrapper {
+        height: 800px;
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .section--hero .container .el-row {
+        align-items: flex-start;
+    }
+    .section--hero .hero-divider {
+        bottom: -1px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .section--hero .earth-wrapper {
+        height: 600px;
+        width: 600px;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    .section--hero {
+        padding-top: 90px;
+        padding-bottom: 80px;
+        min-height: calc(100vh - 380px);
+        height: auto;
+    }
+    .section--hero .el-button {
+        display: none;
+    }
+    .section--hero .earth-wrapper {
+        height: 450px;
+        width: 450px;
+    }
+}
+
+.section--hero__sm {
+    height: 350px;
+    padding-bottom: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.section--hero__sm .container {
+    position: relative;
+    z-index: 2;
+}
+
+.section--hero__sm .container .avatar-container {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    background-color: var(--light);
+    border-radius: 200px 200px 0 0;
+}
+
+.section--hero__sm .container .avatar-container img {
+    width: 250px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .section--hero__sm {
+        height: 350px;
+    }
+    .section--hero__sm .container .avatar-container {
+        width: 250px;
+        padding: 25px;
+    }
+    .section--hero__sm .container .avatar-container img {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .section--hero__sm {
+        height: 300px;
+    }
+    .section--hero__sm .container .avatar-container {
+        width: 200px;
+        padding: 25px;
+    }
+    .section--hero__sm .container .avatar-container img {
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    .section--hero__sm {
+        min-height: 300px;
+        height: 300px;
+    }
+}
+

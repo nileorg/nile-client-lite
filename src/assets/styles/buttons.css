@@ -1,0 +1,20 @@
+.el-button {
+    padding: 15px 40px;
+    border-radius: 100px;
+    border: var(--border-lg);
+    font-family: 'Nunito';
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: var(--transition-200);
+}
+
+.el-button--primary {
+    background-color: var(--primary);
+}
+
+.el-button-sm {
+    padding: 6px 0;
+    width: 100%;
+}

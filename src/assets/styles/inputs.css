@@ -1,0 +1,24 @@
+.el-input {
+    padding: 7px 20px;
+    border-radius: 100px;
+    border: var(--border-lg);
+    font-family: 'Nunito';
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
+    transition: var(--transition-200);
+    background-color: var(--white);
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 520px) {
+    .el-input { 
+        max-width: 100%;
+    }
+}
+
+.el-input::placeholder {
+    text-transform: none;
+}

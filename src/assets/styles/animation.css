@@ -1,0 +1,171 @@
+.animation-target {
+    animation: animation 1000ms linear both;
+}
+@keyframes animation {
+    0% {
+        transform: matrix3d(0.95, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    4.7% {
+        transform: matrix3d(0.972, 0, 0, 0, 0, 0.725, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    9.41% {
+        transform: matrix3d(0.994, 0, 0, 0, 0, 0.942, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    14.11% {
+        transform: matrix3d(1.007, 0, 0, 0, 0, 1.07, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    18.72% {
+        transform: matrix3d(1.011, 0, 0, 0, 0, 1.106, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    24.32% {
+        transform: matrix3d(1.008, 0, 0, 0, 0, 1.075, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    29.93% {
+        transform: matrix3d(1.002, 0, 0, 0, 0, 1.024, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    35.54% {
+        transform: matrix3d(0.999, 0, 0, 0, 0, 0.99, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    41.04% {
+        transform: matrix3d(0.998, 0, 0, 0, 0, 0.98, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    52.15% {
+        transform: matrix3d(1, 0, 0, 0, 0, 0.996, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    63.26% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1.004, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    85.49% {
+        transform: matrix3d(1, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+    100% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+   }
+}
+@-webkit-keyframes MoveUpDown {
+    0% {
+        transform: translateY(0);
+   }
+    100% {
+        transform: translateY(5px);
+   }
+}
+@keyframes MoveUpDown {
+    0% {
+        transform: translateY(0);
+   }
+    100% {
+        transform: translateY(5px);
+   }
+}
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+.rotating {
+    -webkit-animation: rotating 100s linear infinite;
+    -moz-animation: rotating 100s linear infinite;
+    -ms-animation: rotating 100s linear infinite;
+    -o-animation: rotating 100s linear infinite;
+    animation: rotating 100s linear infinite;
+}
+@-webkit-keyframes rotation-1 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+.logo-rotation-1 {
+    -webkit-animation: rotation-1 10s linear infinite;
+    -moz-animation: rotation-1 10s linear infinite;
+    -ms-animation: rotation-1 10s linear infinite;
+    -o-animation: rotation-1 10s linear infinite;
+    animation: rotation-1 10s linear infinite;
+}
+@-webkit-keyframes rotation-2 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+.logo-rotation-2 {
+    -webkit-animation: rotation-2 8s linear infinite;
+    -moz-animation: rotation-2 8s linear infinite;
+    -ms-animation: rotation-2 8s linear infinite;
+    -o-animation: rotation-2 8s linear infinite;
+    animation: rotation-2 8s linear infinite;
+}
+@-webkit-keyframes rotation-3 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+.logo-rotation-3 {
+    -webkit-animation: rotation-3 6s linear infinite;
+    -moz-animation: rotation-3 6s linear infinite;
+    -ms-animation: rotation-3 6s linear infinite;
+    -o-animation: rotation-3 6s linear infinite;
+    animation: rotation-3 6s linear infinite;
+}
+@-webkit-keyframes rotation-4 {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+   }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+   }
+}
+.logo-rotation-4 {
+    -webkit-animation: rotation-4 4s linear infinite;
+    -moz-animation: rotation-4 4s linear infinite;
+    -ms-animation: rotation-4 4s linear infinite;
+    -o-animation: rotation-4 4s linear infinite;
+    animation: rotation-4 4s linear infinite;
+}
