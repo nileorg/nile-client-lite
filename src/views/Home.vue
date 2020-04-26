@@ -71,7 +71,7 @@ export default {
     };
   },
   mounted() {
-    if (this.$store.state.city.link) {
+    if (this.$store.state.city && this.$store.state.city.link) {
       this.$router.push({ name: 'City', params: { city: this.$store.state.city } });
     } else {
       this.fetchCities();

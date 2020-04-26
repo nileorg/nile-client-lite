@@ -168,3 +168,11 @@
     }
 }
 
+.go-back {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
