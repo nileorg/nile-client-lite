@@ -1,32 +1,25 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist';
 
 Vue.use(Vuex);
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+});
+
 export default new Vuex.Store({
   state: {
-    cities: [
-      {
-        name: 'Milano',
-        description: 'lorem ipsum',
-        image: 'base64....',
-        shops: [
-          {
-            name: 'shop 1',
-            description: 'lorem ipsum',
-            image: 'base64...',
-            tags: ['pizza', 'hamgurger'],
-            products: [
-              {
-                name: 'pizza margherita',
-                description: 'pizza margherita',
-                image: 'base64',
-                tags: ['pizza'],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    city: {},
+    shop: {},
   },
+  mutations: {
+    setCity(state, city) {
+      state.city = city;
+    },
+    setShop(state, shop) {
+      state.shop = shop;
+    },
+  },
+  plugins: [vuexLocal.plugin],
 });

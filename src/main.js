@@ -1,12 +1,13 @@
 import Vue from 'vue';
-import VueGlide from 'vue-glide-js';
-import 'vue-glide-js/dist/vue-glide.css';
+import VueCarousel from 'vue-carousel';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import i18n from './i18n';
+import ipfs from './plugins/vue-ipfs';
 
-Vue.use(VueGlide);
+Vue.use(VueCarousel);
+Vue.use(ipfs);
 Vue.config.productionTip = false;
 
 new Vue({

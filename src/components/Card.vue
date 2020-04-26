@@ -26,6 +26,8 @@ export default {
     border-radius: 10px;
     border: var(--border-lg);
     color: var(--black);
+    width: 90%;
+    margin-left: 5%;
 }
 
 .card-header {

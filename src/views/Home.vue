@@ -30,15 +30,24 @@
             placeholder="Ricerca la tua città"
           />
         </div>
-        <vue-glide class="city-selector-carousel" :key="carouselKey" :perView="carouselPerView" :gap="carouselGap">
-          <vue-glide-slide v-for="i in 10" :key="i">
+        <carousel
+          class="city-selector-carousel"
+          :perPageCustom="[[0, 1], [768, 3], [1024, 4], [1240, 6]]"
+          :paginationEnabled="false">
+          <slide
+            class="city-selector-carousel-item"
+            v-for="(city, index) in cities"
+            :key="index"
+            >
             <Card
-              title="prova"
-              description="test"
-              image="http://ipfs.castignoli.it/ipfs/QmQgXab3TQ1CjQAmP2DcmH7MwQhYvJkaUwVrEtRdcc247p"
+              :key="`card-${index}`"
+              :title="city.name"
+              :description="city.description"
+              :image="city.image"
+              @click.native="() => openCity(city)"
             />
-          </vue-glide-slide>
-        </vue-glide>
+          </slide>
+        </carousel>
       </div>
     </div>
   </div>
@@ -47,9 +56,8 @@
 <script>
 import Card from '@/components/Card.vue';
 import {
-  bindOptions as bindCarouselOptions,
-  getDefaults as getCarouselDefaults,
-} from '@/utilities/carousel';
+  Buffer,
+} from 'ipfs';
 
 export default {
   name: 'Home',
@@ -57,11 +65,43 @@ export default {
     Card,
   },
   data() {
-    const carouselDefaults = getCarouselDefaults();
-    return Object.assign(carouselDefaults, {});
+    return {
+      ipfsStatus: false,
+      cities: [],
+    };
   },
   mounted() {
-    bindCarouselOptions(this);
+    if (this.$store.state.city.link) {
+      this.$router.push({ name: 'City', params: { city: this.$store.state.city } });
+    } else {
+      this.fetchCities();
+    }
+  },
+  methods: {
+    openCity(city) {
+      this.$store.commit('setCity', city);
+      this.$router.push({ name: 'City', params: { city } });
+    },
+    async fetchCities() {
+      let ipfs;
+      try {
+        ipfs = await this.$ipfs;
+        this.ipfsStatus = true;
+      } catch (err) {
+        this.ipfsStatus = false;
+        return;
+      }
+      const chunks = [];
+      /* eslint-disable-next-line no-restricted-syntax */
+      for await (const chunk of ipfs.cat('QmdXs9HiRC1C1PQymtebbsPdsSdtpbGMght52qbKwctaRo')) {
+        chunks.push(chunk);
+      }
+      try {
+        this.cities = JSON.parse(Buffer.concat(chunks).toString());
+      } catch (err) {
+        this.cities = [];
+      }
+    },
   },
 };
 </script>
@@ -75,8 +115,7 @@ export default {
 }
 
 .city-selector-carousel {
-  display: inline-block;
-  padding-left: 30px;
+  width: 100vw;
   margin-top: 20px;
 }
 
