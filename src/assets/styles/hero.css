@@ -176,3 +176,10 @@
     width: 30px;
     cursor: pointer;
   }
+
+  .avatar-container img {
+    border-radius: 100% 100%;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}

@@ -93,7 +93,7 @@ export default {
       }
       const chunks = [];
       /* eslint-disable-next-line no-restricted-syntax */
-      for await (const chunk of ipfs.cat('QmdXs9HiRC1C1PQymtebbsPdsSdtpbGMght52qbKwctaRo')) {
+      for await (const chunk of ipfs.cat('QmZ7cmRd6ypfQ1A1WyYbkHsS7BNBcffZ3JjGr1fj4zkBdd')) {
         chunks.push(chunk);
       }
       try {
