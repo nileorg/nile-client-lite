@@ -1,7 +1,15 @@
 <template>
   <div id="app">
-    <img @click="() => {$modal.hide('account'); $modal.show('account')}" class="account" src="@/assets/user.svg" />
-    <img @click="() => {$modal.hide('language-selector'); $modal.show('language-selector')}" class="language-selector" src="@/assets/flag.svg" />
+    <img
+      @click="() => {$modal.hide('account'); $modal.show('account')}"
+      class="account"
+      src="@/assets/user.svg"
+    />
+    <img
+      @click="() => {$modal.hide('language-selector'); $modal.show('language-selector')}"
+      class="language-selector"
+      src="@/assets/flag.svg"
+    />
     <modal
       :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
       height="auto"
@@ -64,15 +72,15 @@
       width="320"
       name="language-selector"
     >
-    <h4>{{$t('languageTitle')}}</h4>
-    <button
-      class="el-button el-button-sm el-button--primary card-button account-input"
+      <h4>{{$t('languageTitle')}}</h4>
+      <button
+        class="el-button el-button-sm el-button--primary card-button account-input"
         @click="() => {$modal.hide('language-selector'); $store.commit('setLang', 'en'); $root.$i18n.locale = 'en'}"
-    >English</button>
-    <button
-      class="el-button el-button-sm el-button--primary card-button account-input"
+      >English</button>
+      <button
+        class="el-button el-button-sm el-button--primary card-button account-input"
         @click="() => {$modal.hide('language-selector'); $store.commit('setLang', 'it'); $root.$i18n.locale = 'it'}"
-    >Italiano</button>
+      >Italiano</button>
     </modal>
     <router-view />
   </div>
@@ -84,7 +92,7 @@ export default {
     if (this.$store.state.lang) {
       this.$root.$i18n.locale = this.$store.state.lang;
     }
-  },
+  }
 };
 </script>
 
