@@ -195,10 +195,10 @@ export default {
       for (const product in orders) {
         if (orders[product]) {
           const quantity = orders[product];
-          formattedText += `${product} x${quantity}\n`;
+          formattedText += `${product} x${quantity}%0A`;
         }
       }
-      formattedText += `\n${notes}`;
+      formattedText += `%0A${notes}`;
       switch (type) {
         case 'whatsapp':
           window.open(`https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`);
