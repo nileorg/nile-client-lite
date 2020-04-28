@@ -7,12 +7,6 @@
         :style="{ backgroundImage: `url('${shopData.image}')` }"
       >
         <img @click="backToCity" class="go-back" src="@/assets/go-back-left-arrow.svg" />
-        <img
-          v-if="Object.keys($store.state.cart.orders).length > 0"
-          @click="goToCart"
-          class="go-to-cart"
-          src="@/assets/cart.svg"
-        />
         <div class="container">
           <div class="avatar-container">
             <img alt="vendor avatar" :src="shopData.logo" />
@@ -71,6 +65,15 @@
         </div>
       </div>
     </div>
+    <button
+      class="order-floating-button animation-target"
+      v-if="Object.keys($store.state.cart.orders).length > 0"
+    >
+      <img
+        @click="goToCart"
+        src="@/assets/cart.svg"
+      />
+    </button>
     <modal
       :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
       height="auto"
@@ -123,9 +126,11 @@
         </div>
         <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
         <button
+            v-for="(contact, index) in shop.contacts"
+            :key="index"
             class="el-button el-button-sm el-button--primary card-button send-order-button"
-            @click="sendOrder"
-          >Send order</button>
+            @click="() => sendOrder(contact.type, contact.value)"
+          >Send order via {{contact.type}}</button>
       </div>
     </modal>
     <v-dialog />
@@ -183,7 +188,7 @@ export default {
     }
   },
   methods: {
-    sendOrder() {
+    sendOrder(type, contact) {
       let formattedText = '';
       const { orders, notes } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
@@ -194,7 +199,19 @@ export default {
         }
       }
       formattedText += `\n${notes}`;
-      this.$clipboard(formattedText);
+      switch (type) {
+        case 'whatsapp':
+          window.open(`https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`);
+          break;
+        case 'sms':
+          window.open(`sms:${contact}?&body=${formattedText}`);
+          break;
+        case 'call':
+          window.open(`tel:${contact}`);
+          break;
+        default:
+          this.$clipboard(formattedText);
+      }
     },
     getButtonAction(product) {
       if (Object.keys(this.$store.state.cart.orders).includes(product.name)) {
@@ -342,10 +359,56 @@ export default {
 
 .send-order-button {
   max-width: 300px;
+  width: 100%;
+  display: block;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quantity-selector-editor {
   display: inline-block;
+}
+
+.order-floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: var(--border-lg);
+  background-color: var(--primary);
+  display: block;
+  padding: 0;
+  cursor: pointer;
+}
+
+.order-floating-button img {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+}
+
+@media screen {
+.order-floating-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: var(--border-lg);
+  background-color: var(--primary);
+  display: block;
+  padding: 0;
+  cursor: pointer;
+}
+
+.order-floating-button img {
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+}
 }
 </style>
