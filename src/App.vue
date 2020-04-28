@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img @click="() => $modal.show('account')" class="account" src="@/assets/user.svg" />
-    <img @click="() => $modal.show('language-selector')" class="language-selector" src="@/assets/flag.svg" />
+    <img @click="() => {$modal.hide('account'); $modal.show('account')}" class="account" src="@/assets/user.svg" />
+    <img @click="() => {$modal.hide('language-selector'); $modal.show('language-selector')}" class="language-selector" src="@/assets/flag.svg" />
     <modal
       :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
       height="auto"
