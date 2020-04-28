@@ -20,5 +20,6 @@
   "accountPhone": "Phone",
   "accountNotes": "Notes",
   "accountRingbell": "Doorbell",
-  "accountClose": "Close"
+  "accountClose": "Close",
+  "languageTitle": "Select language"
 }

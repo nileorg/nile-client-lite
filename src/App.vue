@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img @click="() => $modal.show('account')" class="account" src="@/assets/user.svg" />
+    <img @click="() => $modal.show('language-selector')" class="language-selector" src="@/assets/flag.svg" />
     <modal
       :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
       height="auto"
@@ -57,12 +58,34 @@
         >{{$t('accountClose')}}</button>
       </div>
     </modal>
+    <modal
+      :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
+      height="auto"
+      width="320"
+      name="language-selector"
+    >
+    <h4>{{$t('languageTitle')}}</h4>
+    <button
+      class="el-button el-button-sm el-button--primary card-button account-input"
+        @click="() => {$modal.hide('language-selector'); $store.commit('setLang', 'en'); $root.$i18n.locale = 'en'}"
+    >English</button>
+    <button
+      class="el-button el-button-sm el-button--primary card-button account-input"
+        @click="() => {$modal.hide('language-selector'); $store.commit('setLang', 'it'); $root.$i18n.locale = 'it'}"
+    >Italiano</button>
+    </modal>
     <router-view />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    if (this.$store.state.lang) {
+      this.$root.$i18n.locale = this.$store.state.lang;
+    }
+  },
+};
 </script>
 
 <style>
@@ -86,7 +109,22 @@ export default {};
   cursor: pointer;
 }
 
+.language-selector {
+  position: fixed;
+  z-index: 2;
+  right: 30px;
+  top: 80px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
 .account-input {
+  position: relative;
   margin-top: 15px;
+  width: 100%;
+  margin-left: auto !important;
+  margin-right: auto;
+  display: block;
 }
 </style>
