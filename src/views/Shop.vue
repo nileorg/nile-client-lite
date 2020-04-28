@@ -405,7 +405,7 @@ export default {
   border-right: none;
   padding-left: 15px;
   position: relative;
-  height: 24px;
+  height: 30px;
   background-color: white;
 }
 .go-to-cart {
