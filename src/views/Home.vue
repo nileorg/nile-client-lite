@@ -28,6 +28,7 @@
             type="text"
             class="el-input city-selector-filter"
             :placeholder="$t('citySelectorFilter')"
+            v-model="cityFilter"
           />
         </div>
         <carousel
@@ -36,7 +37,7 @@
           :paginationEnabled="false">
           <slide
             class="city-selector-carousel-item"
-            v-for="(city, index) in cities"
+            v-for="(city, index) in filteredCities"
             :key="index"
             >
             <Card
@@ -69,7 +70,16 @@ export default {
     return {
       ipfsStatus: false,
       cities: [],
+      cityFilter: '',
     };
+  },
+  computed: {
+    filteredCities() {
+      if (this.cityFilter !== '') {
+        return this.cities.filter((city) => city.name.toUpperCase().includes(this.cityFilter.toUpperCase()));
+      }
+      return this.cities;
+    },
   },
   mounted() {
     if (this.$store.state.city && this.$store.state.city.link) {
