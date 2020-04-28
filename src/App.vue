@@ -92,7 +92,7 @@ export default {
     if (this.$store.state.lang) {
       this.$root.$i18n.locale = this.$store.state.lang;
     }
-  }
+  },
 };
 </script>
 
@@ -108,7 +108,7 @@ export default {
 @import url("./assets/styles/hero.css");
 
 .account {
-  position: fixed;
+  position: absolute;
   z-index: 2;
   right: 30px;
   top: 30px;
@@ -118,7 +118,7 @@ export default {
 }
 
 .language-selector {
-  position: fixed;
+  position: absolute;
   z-index: 2;
   right: 30px;
   top: 80px;

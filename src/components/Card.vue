@@ -34,6 +34,8 @@ export default {
   color: var(--black);
   width: 90%;
   margin-left: 5%;
+  max-height: none !important;
+  padding-bottom: 20px;
 }
 
 .card-header {
@@ -57,6 +59,7 @@ export default {
 
 .card-body {
   padding: 15px;
+  padding-bottom: 0;
 }
 
 .card-button {

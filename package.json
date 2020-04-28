@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "chunk": "^0.0.2",
     "core-js": "^3.6.4",
     "ipfs": "^0.43.0",
     "v-clipboard": "^2.2.2",

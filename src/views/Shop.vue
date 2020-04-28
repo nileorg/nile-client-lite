@@ -26,9 +26,7 @@
         <hr />
         <div class="el-row">
           <div class="el-col el-col-24">
-            <p
-              style="margin: 0; font-size: 13px;"
-            >{{$t('tagFilterProducts')}}</p>
+            <p style="margin: 0; font-size: 13px;">{{$t('tagFilterProducts')}}</p>
             <carousel
               class="tag-carousel-available"
               :perPageCustom="[[0, 3], [768, 6], [1024, 7], [1240, 8]]"
@@ -48,7 +46,11 @@
           </div>
         </div>
         <hr />
-        <div class="el-row">
+        <div
+          class="el-row"
+          v-for="(productsFiltered, indexChunk) in chunkedProductsFiltered"
+          :key="indexChunk"
+        >
           <div
             v-for="(product, index) in productsFiltered"
             :key="index"
@@ -57,7 +59,7 @@
           >
             <Card
               :title="product.name"
-              :description="`${product.price}€ \n ${product.description}`"
+              :description="`${product.description}`"
               :image="product.image"
               :button="getButtonAction(product)"
             />
@@ -70,9 +72,7 @@
       v-if="Object.keys($store.state.cart.orders).length > 0"
       @click="goToCart"
     >
-      <img
-        src="@/assets/cart.svg"
-      />
+      <img src="@/assets/cart.svg" />
     </button>
     <modal
       :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
@@ -104,13 +104,10 @@
     >
       <div v-if="$store.state.cart.shop">
         <h4>{{$t('cartTitle')}}</h4>
-        <div
-          class="cart-item"
-          v-for="(_, product) in $store.state.cart.orders"
-          :key="product"
-        >
+        <div class="cart-item" v-for="(_, product) in $store.state.cart.orders" :key="product">
           <span style="font-size: 12px;">
-            {{product}} - {{$store.state.cart.orders[product].quantity * $store.state.cart.orders[product].price}}€
+            {{product}} -
+            {{$store.state.cart.orders[product].quantity * $store.state.cart.orders[product].price}}€
           </span>
           <div class="quantity-selector-editor">
             <input
@@ -124,7 +121,9 @@
             <button
               class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
               @click="() => deleteFromCart(product)"
-            ><img src="@/assets/bin.svg"></button>
+            >
+              <img src="@/assets/bin.svg" />
+            </button>
           </div>
         </div>
         <textarea
@@ -133,18 +132,19 @@
           v-model="$store.state.cart.notes"
           @change="() => $store.commit('saveOrder')"
         ></textarea>
-        <b>{{$t('cartTotal')}}: {{totalPrice}}€</b><br/>
+        <b>{{$t('cartTotal')}}: {{totalPrice}}€</b>
+        <br />
         <p v-html="address"></p>
         <span
           class="edit-address"
           @click="() => {$modal.hide('cart'); $modal.show('account')}"
         >{{$t('cartEditAddress')}}</span>
         <button
-            v-for="(contact, index) in shopData.contacts"
-            :key="index"
-            class="el-button el-button-sm el-button--primary card-button send-order-button"
-            @click="() => sendOrder(contact.type, contact.value)"
-          >{{$t('cartSendOrderVia')}} {{contact.type}}</button>
+          v-for="(contact, index) in shopData.contacts"
+          :key="index"
+          class="el-button el-button-sm el-button--primary card-button send-order-button"
+          @click="() => sendOrder(contact.type, contact.value)"
+        >{{$t('cartSendOrderVia')}} {{contact.type}}</button>
       </div>
     </modal>
     <v-dialog />
@@ -155,6 +155,7 @@
 import Card from '@/components/Card.vue';
 import hash from '@/hash.js';
 import { Buffer } from 'ipfs';
+import chunk from 'chunk';
 
 export default {
   name: 'Shop',
@@ -188,6 +189,9 @@ export default {
         return this.products.filter((shop) => shop.tags.some((r) => this.activeTags.includes(r)));
       }
       return this.products;
+    },
+    chunkedProductsFiltered() {
+      return chunk(this.productsFiltered, 4);
     },
     totalPrice() {
       let total = 0;
@@ -249,7 +253,8 @@ export default {
         if (orders[product]) {
           const { quantity, price } = orders[product];
           total += price * quantity;
-          formattedText += `${quantity} x ${product} - ${price}€ = ${price * quantity}€%0A`;
+          formattedText += `${quantity} x ${product} - ${price}€ = ${price
+            * quantity}€%0A`;
         }
       }
       formattedText += `${notes}`;
@@ -257,21 +262,31 @@ export default {
       const storeState = this.$store.state;
       if (storeState.account) {
         if (storeState.account.address) {
-          formattedText += `${this.$t('accountAddress')}: ${storeState.account.address}%0A`;
+          formattedText += `${this.$t('accountAddress')}: ${
+            storeState.account.address
+          }%0A`;
         }
         if (storeState.account.doorbell) {
-          formattedText += `${this.$t('accountRingbell')}: ${storeState.account.doorbell}%0A`;
+          formattedText += `${this.$t('accountRingbell')}: ${
+            storeState.account.doorbell
+          }%0A`;
         }
         if (storeState.account.phone) {
-          formattedText += `${this.$t('accountPhone')}: ${storeState.account.phone}%0A`;
+          formattedText += `${this.$t('accountPhone')}: ${
+            storeState.account.phone
+          }%0A`;
         }
         if (storeState.account.notes) {
-          formattedText += `${this.$t('accountNotes')}: ${storeState.account.notes}%0A`;
+          formattedText += `${this.$t('accountNotes')}: ${
+            storeState.account.notes
+          }%0A`;
         }
       }
       switch (type) {
         case 'whatsapp':
-          window.open(`https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`);
+          window.open(
+            `https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`,
+          );
           break;
         case 'sms':
           window.open(`sms:${contact}?&body=${formattedText}`);
@@ -287,7 +302,10 @@ export default {
       if (Object.keys(this.$store.state.cart.orders).includes(product.name)) {
         return { label: this.$t('cartEdit'), click: () => this.goToCart() };
       }
-      return { label: this.$t('cartAdd'), click: () => this.openProductQuantitySelector(product) };
+      return {
+        label: `${product.price}€ ${this.$t('cartAdd')}`,
+        click: () => this.openProductQuantitySelector(product),
+      };
     },
     deleteFromCart(product) {
       this.$delete(this.$store.state.cart.orders, product);
@@ -358,8 +376,8 @@ export default {
       }
       const chunks = [];
       /* eslint-disable-next-line no-restricted-syntax */
-      for await (const chunk of ipfs.cat(link)) {
-        chunks.push(chunk);
+      for await (const chunkFile of ipfs.cat(link)) {
+        chunks.push(chunkFile);
       }
       try {
         this.products = JSON.parse(Buffer.concat(chunks).toString());
@@ -385,13 +403,14 @@ export default {
   vertical-align: top;
 }
 
-.add-to-cart-button, .remove-from-cart-button {
+.add-to-cart-button,
+.remove-from-cart-button {
   border-radius: 0 20px 20px 0;
   width: 50px;
 }
 
 .remove-from-cart-button img {
-  height: 20px;
+  height: 13px;
 }
 
 .add-to-cart-button {
@@ -405,7 +424,7 @@ export default {
   border-right: none;
   padding-left: 15px;
   position: relative;
-  height: 30px;
+  height: 25px;
   background-color: white;
 }
 .go-to-cart {
