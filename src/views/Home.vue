@@ -55,6 +55,7 @@
 
 <script>
 import Card from '@/components/Card.vue';
+import hash from '@/hash.js';
 import {
   Buffer,
 } from 'ipfs';
@@ -91,9 +92,10 @@ export default {
         this.ipfsStatus = false;
         return;
       }
+      this.$store.commit('setHash', hash);
       const chunks = [];
       /* eslint-disable-next-line no-restricted-syntax */
-      for await (const chunk of ipfs.cat('QmNp7y9V1t31S2QqRYQNdXGtYUTUVawgsSLhH3E9epDM7k')) {
+      for await (const chunk of ipfs.cat(hash)) {
         chunks.push(chunk);
       }
       try {

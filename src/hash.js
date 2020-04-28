@@ -1,0 +1,1 @@
+export default 'QmNp7y9V1t31S2QqRYQNdXGtYUTUVawgsSLhH3E9epDM7k';

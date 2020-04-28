@@ -70,6 +70,7 @@
 
 <script>
 import Card from '@/components/Card.vue';
+import hash from '@/hash';
 import { Buffer } from 'ipfs';
 
 export default {
@@ -105,15 +106,19 @@ export default {
     },
   },
   mounted() {
-    if (this.city) {
-      this.cityData = this.city;
-    } else if (this.$store.state.city) {
-      this.cityData = this.$store.state.city;
-    }
-    if (this.cityData && this.cityData.link) {
-      this.fetchShops(this.cityData.link);
-    } else {
+    if (hash !== this.$store.state.hash) {
       this.backToCitySelector();
+    } else {
+      if (this.city) {
+        this.cityData = this.city;
+      } else if (this.$store.state.city) {
+        this.cityData = this.$store.state.city;
+      }
+      if (this.cityData && this.cityData.link) {
+        this.fetchShops(this.cityData.link);
+      } else {
+        this.backToCitySelector();
+      }
     }
   },
   methods: {

@@ -143,6 +143,7 @@
 
 <script>
 import Card from '@/components/Card.vue';
+import hash from '@/hash.js';
 import { Buffer } from 'ipfs';
 
 export default {
@@ -192,15 +193,20 @@ export default {
     },
   },
   mounted() {
-    if (this.shop) {
-      this.shopData = this.shop;
+    if (hash !== this.$store.state.hash) {
+      this.$store.commit('setShop', null);
+      this.$router.push({ name: 'City' });
     } else {
-      this.shopData = this.$store.state.shop;
-    }
-    if (this.shopData.link) {
-      this.fetchProducts(this.shopData.link);
-    } else {
-      this.error = true;
+      if (this.shop) {
+        this.shopData = this.shop;
+      } else {
+        this.shopData = this.$store.state.shop;
+      }
+      if (this.shopData.link) {
+        this.fetchProducts(this.shopData.link);
+      } else {
+        this.error = true;
+      }
     }
   },
   methods: {

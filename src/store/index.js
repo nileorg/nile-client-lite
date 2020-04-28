@@ -10,6 +10,7 @@ const vuexLocal = new VuexPersistence({
 
 export default new Vuex.Store({
   state: {
+    hash: null,
     city: {},
     shop: {},
     cart: {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setHash(state, hash) {
+      state.hash = hash;
+    },
     setCity(state, city) {
       state.city = city;
     },
