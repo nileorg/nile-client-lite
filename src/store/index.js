@@ -12,6 +12,11 @@ export default new Vuex.Store({
   state: {
     city: {},
     shop: {},
+    cart: {
+      shop: '',
+      orders: {},
+      notes: '',
+    },
   },
   mutations: {
     setCity(state, city) {
@@ -19,6 +24,17 @@ export default new Vuex.Store({
     },
     setShop(state, shop) {
       state.shop = shop;
+    },
+    addToCart(state, order) {
+      Vue.set(state.cart, 'shop', order.shop);
+      Vue.set(state.cart.orders, order.name, order.quantity);
+    },
+    emptyCart(state) {
+      state.cart = {
+        shop: '',
+        orders: {},
+        notes: '',
+      };
     },
   },
   plugins: [vuexLocal.plugin],

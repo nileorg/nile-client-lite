@@ -7,6 +7,12 @@
         :style="{ backgroundImage: `url('${shopData.image}')` }"
       >
         <img @click="backToCity" class="go-back" src="@/assets/go-back-left-arrow.svg" />
+        <img
+          v-if="Object.keys($store.state.cart.orders).length > 0"
+          @click="goToCart"
+          class="go-to-cart"
+          src="@/assets/cart.svg"
+        />
         <div class="container">
           <div class="avatar-container">
             <img alt="vendor avatar" :src="shopData.logo" />
@@ -55,11 +61,74 @@
             class="el-col el-col-6 el-col-xs-24"
             style="padding: 10px;"
           >
-            <Card :title="product.name" :description="product.description" :image="product.image" />
+            <Card
+              :title="product.name"
+              :description="product.description"
+              :image="product.image"
+              :button="getButtonAction(product)"
+            />
           </div>
         </div>
       </div>
     </div>
+    <modal
+      :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
+      height="auto"
+      width="320"
+      name="product-quantity-selector"
+    >
+      <div v-if="productQuantitySelector">
+        <h4>{{productQuantitySelector.name}}</h4>
+        <p>{{productQuantitySelector.description}}</p>
+        <input
+          type="number"
+          value="1"
+          min="1"
+          class="add-to-cart-quantity"
+          v-model="productQuantity"
+        />
+        <button
+          class="el-button el-button-sm el-button--primary card-button add-to-cart-button"
+          @click="() => addToCart(productQuantitySelector.name, productQuantity)"
+        >AGGIUNGI</button>
+      </div>
+    </modal>
+    <modal
+      :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
+      height="auto"
+      width="320"
+      name="cart"
+    >
+      <div v-if="$store.state.cart.shop">
+        <h4>Cart</h4>
+        <div
+          class="cart-item"
+          v-for="(quantity, product) in $store.state.cart.orders"
+          :key="product"
+        >
+          {{product}}
+          <div class="quantity-selector-editor">
+            <input
+              type="number"
+              value="1"
+              min="1"
+              class="add-to-cart-quantity"
+              v-model="$store.state.cart.orders[product]"
+            />
+            <button
+              class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
+              @click="() => deleteFromCart(product)"
+            >-</button>
+          </div>
+        </div>
+        <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
+        <button
+            class="el-button el-button-sm el-button--primary card-button send-order-button"
+            @click="sendOrder"
+          >Send order</button>
+      </div>
+    </modal>
+    <v-dialog />
   </div>
 </template>
 
@@ -82,6 +151,8 @@ export default {
       shopData: {},
       error: false,
       activeTags: [],
+      productQuantitySelector: null,
+      productQuantity: 1,
     };
   },
   computed: {
@@ -112,6 +183,48 @@ export default {
     }
   },
   methods: {
+    sendOrder() {
+      let formattedText = '';
+      const { orders, notes } = this.$store.state.cart;
+      /* eslint-disable-next-line no-restricted-syntax */
+      for (const product in orders) {
+        if (orders[product]) {
+          const quantity = orders[product];
+          formattedText += `${product} x${quantity}\n`;
+        }
+      }
+      formattedText += `\n${notes}`;
+      this.$clipboard(formattedText);
+    },
+    getButtonAction(product) {
+      if (Object.keys(this.$store.state.cart.orders).includes(product.name)) {
+        return { label: 'Edit in cart', click: () => this.goToCart() };
+      }
+      return { label: 'Add to cart', click: () => this.openProductQuantitySelector(product) };
+    },
+    deleteFromCart(product) {
+      this.$delete(this.$store.state.cart.orders, product);
+      if (Object.keys(this.$store.state.cart.orders).length === 0) {
+        this.$modal.hide('cart');
+      }
+    },
+    goToCart() {
+      this.$modal.show('cart');
+    },
+    openProductQuantitySelector(product) {
+      this.productQuantitySelector = product;
+      this.$modal.show('product-quantity-selector');
+    },
+    addToCart(name, quantity) {
+      this.$store.commit('addToCart', {
+        name,
+        quantity,
+        shop: this.shopData.name,
+      });
+      this.$modal.hide('product-quantity-selector');
+      this.productQuantitySelector = null;
+      this.productQuantity = 1;
+    },
     toggleTag(tag) {
       const index = this.activeTags.indexOf(tag);
       if (index >= 0) {
@@ -120,9 +233,30 @@ export default {
         this.activeTags.push(tag);
       }
     },
-    backToCity() {
+    leaveShop() {
+      this.$store.commit('emptyCart');
       this.$store.commit('setShop', null);
       this.$router.push({ name: 'City' });
+    },
+    backToCity() {
+      if (Object.keys(this.$store.state.cart.orders).length === 0) {
+        this.leaveShop();
+      } else {
+        this.$modal.show('dialog', {
+          title: 'Leaving this shop will delete your order',
+          buttons: [
+            {
+              title: 'Ok, leave',
+              handler: () => {
+                this.leaveShop();
+              },
+            },
+            {
+              title: 'No, stay on this shop',
+            },
+          ],
+        });
+      }
     },
     async fetchProducts(link) {
       let ipfs;
@@ -155,5 +289,63 @@ export default {
 .tag-carousel-slide {
   width: 97%;
   margin-left: 3%;
+}
+.add-to-cart-quantity,
+.add-to-cart-button {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.add-to-cart-button, .remove-from-cart-button {
+  border-radius: 0 20px 20px 0;
+  width: 50px;
+}
+
+.add-to-cart-button {
+  width: 150px;
+}
+
+.add-to-cart-quantity {
+  width: 40px;
+  border-radius: 20px 0 0 20px;
+  border: var(--border-lg);
+  border-right: none;
+  padding-left: 15px;
+  position: relative;
+  height: 24px;
+  background-color: white;
+}
+.go-to-cart {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.cart-item {
+  margin-top: 10px;
+}
+
+.cart-item * {
+  vertical-align: middle;
+}
+
+.custom-notes {
+  width: 80%;
+  background-color: white;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  border: var(--border-lg);
+}
+
+.send-order-button {
+  max-width: 300px;
+  margin-top: 30px;
+}
+
+.quantity-selector-editor {
+  display: inline-block;
 }
 </style>
