@@ -130,7 +130,7 @@
         Total: {{totalPrice}}€
         <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
         <button
-            v-for="(contact, index) in shop.contacts"
+            v-for="(contact, index) in shopData.contacts"
             :key="index"
             class="el-button el-button-sm el-button--primary card-button send-order-button"
             @click="() => sendOrder(contact.type, contact.value)"
