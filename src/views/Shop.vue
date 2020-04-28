@@ -119,6 +119,7 @@
               min="1"
               class="add-to-cart-quantity"
               v-model="$store.state.cart.orders[product].quantity"
+              @change="() => $store.commit('saveOrder')"
             />
             <button
               class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
@@ -126,9 +127,10 @@
             >-</button>
           </div>
         </div>
-        <hr/>
-        Total: {{totalPrice}}€
         <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
+        <b>Total: {{totalPrice}}€</b><br/>
+        <p v-html="address"></p>
+        <span class="edit-address" @click="() => {$modal.hide('cart'); $modal.show('account')}">Edit Address</span>
         <button
             v-for="(contact, index) in shopData.contacts"
             :key="index"
@@ -190,6 +192,13 @@ export default {
         }
       }
       return total;
+    },
+    address() {
+      const storeState = this.$store.state;
+      return `${storeState.account.firstname} ${storeState.account.lastname}<br/>
+      ${storeState.account.address}<br/>
+      ${storeState.account.ringbell}<br/>
+      ${storeState.account.notes}`;
     },
   },
   mounted() {
@@ -378,10 +387,11 @@ export default {
 .custom-notes {
   width: 80%;
   background-color: white;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
   border: var(--border-lg);
+  margin-bottom: 20px;
 }
 
 .send-order-button {
@@ -418,24 +428,29 @@ export default {
 }
 
 @media screen {
-.order-floating-button {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
-  border: var(--border-lg);
-  background-color: var(--primary);
-  display: block;
-  padding: 0;
-  cursor: pointer;
+  .order-floating-button {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    border: var(--border-lg);
+    background-color: var(--primary);
+    display: block;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .order-floating-button img {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+  }
 }
 
-.order-floating-button img {
-  width: 30px;
-  height: 30px;
-  margin-top: 5px;
-}
+.edit-address {
+  text-decoration: underline;
+  color: var(--primary);
 }
 </style>

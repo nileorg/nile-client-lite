@@ -18,6 +18,13 @@ export default new Vuex.Store({
       orders: {},
       notes: '',
     },
+    account: {
+      firstname: '',
+      lastname: '',
+      address: '',
+      ringbell: '',
+      notes: '',
+    },
   },
   mutations: {
     setHash(state, hash) {
@@ -42,6 +49,12 @@ export default new Vuex.Store({
         orders: {},
         notes: '',
       };
+    },
+    saveAccount() {
+      //
+    },
+    saveOrder() {
+      //
     },
   },
   plugins: [vuexLocal.plugin],
