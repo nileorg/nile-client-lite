@@ -213,7 +213,7 @@ export default {
         if (orders[product]) {
           const { quantity, price } = orders[product];
           total += price * quantity;
-          formattedText += `${product} - ${price}€ x${quantity} = ${price * quantity}€%0A`;
+          formattedText += `${quantity} x ${product} - ${price}€ = ${price * quantity}€%0A`;
         }
       }
       formattedText += `${notes}`;
