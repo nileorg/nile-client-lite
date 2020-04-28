@@ -27,7 +27,10 @@ export default new Vuex.Store({
     },
     addToCart(state, order) {
       Vue.set(state.cart, 'shop', order.shop);
-      Vue.set(state.cart.orders, order.name, order.quantity);
+      Vue.set(state.cart.orders, order.name, {
+        price: order.price,
+        quantity: order.quantity,
+      });
     },
     emptyCart(state) {
       state.cart = {

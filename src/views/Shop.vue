@@ -57,7 +57,7 @@
           >
             <Card
               :title="product.name"
-              :description="product.description"
+              :description="`${product.price}€ \n ${product.description}`"
               :image="product.image"
               :button="getButtonAction(product)"
             />
@@ -68,9 +68,9 @@
     <button
       class="order-floating-button animation-target"
       v-if="Object.keys($store.state.cart.orders).length > 0"
+      @click="goToCart"
     >
       <img
-        @click="goToCart"
         src="@/assets/cart.svg"
       />
     </button>
@@ -92,7 +92,7 @@
         />
         <button
           class="el-button el-button-sm el-button--primary card-button add-to-cart-button"
-          @click="() => addToCart(productQuantitySelector.name, productQuantity)"
+          @click="() => addToCart(productQuantitySelector.name, productQuantitySelector.price, productQuantity)"
         >AGGIUNGI</button>
       </div>
     </modal>
@@ -106,17 +106,19 @@
         <h4>Cart</h4>
         <div
           class="cart-item"
-          v-for="(quantity, product) in $store.state.cart.orders"
+          v-for="(_, product) in $store.state.cart.orders"
           :key="product"
         >
-          {{product}}
+          <span style="font-size: 12px;">
+            {{product}} - {{$store.state.cart.orders[product].quantity * $store.state.cart.orders[product].price}}€
+          </span>
           <div class="quantity-selector-editor">
             <input
               type="number"
               value="1"
               min="1"
               class="add-to-cart-quantity"
-              v-model="$store.state.cart.orders[product]"
+              v-model="$store.state.cart.orders[product].quantity"
             />
             <button
               class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
@@ -124,6 +126,8 @@
             >-</button>
           </div>
         </div>
+        <hr/>
+        Total: {{totalPrice}}€
         <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
         <button
             v-for="(contact, index) in shop.contacts"
@@ -174,6 +178,18 @@ export default {
       }
       return this.products;
     },
+    totalPrice() {
+      let total = 0;
+      const { orders } = this.$store.state.cart;
+      /* eslint-disable-next-line no-restricted-syntax */
+      for (const product in orders) {
+        if (orders[product]) {
+          const { quantity, price } = orders[product];
+          total += price * quantity;
+        }
+      }
+      return total;
+    },
   },
   mounted() {
     if (this.shop) {
@@ -190,15 +206,18 @@ export default {
   methods: {
     sendOrder(type, contact) {
       let formattedText = '';
+      let total = 0;
       const { orders, notes } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
       for (const product in orders) {
         if (orders[product]) {
-          const quantity = orders[product];
-          formattedText += `${product} x${quantity}%0A`;
+          const { quantity, price } = orders[product];
+          total += price * quantity;
+          formattedText += `${product} - ${price}€ x${quantity} = ${price * quantity}€%0A`;
         }
       }
-      formattedText += `%0A${notes}`;
+      formattedText += `${notes}`;
+      formattedText += `%0ATotal: ${total}€`;
       switch (type) {
         case 'whatsapp':
           window.open(`https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`);
@@ -226,15 +245,17 @@ export default {
       }
     },
     goToCart() {
+      this.$modal.hide('cart');
       this.$modal.show('cart');
     },
     openProductQuantitySelector(product) {
       this.productQuantitySelector = product;
       this.$modal.show('product-quantity-selector');
     },
-    addToCart(name, quantity) {
+    addToCart(name, price, quantity) {
       this.$store.commit('addToCart', {
         name,
+        price,
         quantity,
         shop: this.shopData.name,
       });
