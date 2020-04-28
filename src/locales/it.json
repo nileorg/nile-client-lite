@@ -1,3 +1,24 @@
 {
-  "message": "hello i18n !!"
+  "title": "Nile, nasci!",
+  "subtitle": "Viviamo in una società in cui le grandi aziende hanno il potere di influenzare le economie e le tendenze. Oggi le grandi aziende che possiedono il mercato online non pagano le tasse, non pagano le imposte, non pagano i loro dipendenti e stanno perturbando le economie locali. Pensiamo che il mondo meriti un'alternativa migliore, così decidiamo di fondare il Nilo",
+  "citySelectorTitle": "Scorrere le città",
+  "citySelectorFilter": "Ricerca per nome della città",
+  "tagFilterShops": "Cliccare sui tag per filtrare i negozi, cliccare di nuovo per disattivare",
+  "tagFilterProducts": "Cliccare sui tag per filtrare i prodotti, cliccare di nuovo per disattivare",
+  "cartTitle": "Il tuo ordine",
+  "cartAdd": "Aggiungi",
+  "cartEdit": "Modifica",
+  "cartTotal": "Totale",
+  "cartNotes": "Note",
+  "cartEditAddress": "Modifica indirizzo",
+  "cartWarningEmptyAccount": "Nessun indirizzo è impostato",
+  "cartSendOrderVia": "Invia ordine via",
+  "accountTitle": "Inserisci i tuoi dati",
+  "accountFirstname": "Nome",
+  "accountLastname": "Nome",
+  "accountAddress": "Indirizzo",
+  "accountPhone": "Telefono",
+  "accountNotes": "Note",
+  "accountRingbell": "Campanello",
+  "accountClose": "Chiudere"
 }

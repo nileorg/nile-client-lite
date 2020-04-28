@@ -210,8 +210,8 @@ export default {
       if (storeState.account.address) {
         address += `${storeState.account.address}<br/>`;
       }
-      if (storeState.account.ringbell) {
-        address += `${storeState.account.ringbell}<br/>`;
+      if (storeState.account.doorbell) {
+        address += `${storeState.account.doorbell}<br/>`;
       }
       if (storeState.account.phone) {
         address += `${storeState.account.phone}<br/>`;
@@ -259,8 +259,8 @@ export default {
         if (storeState.account.address) {
           formattedText += `${this.$t('accountAddress')}: ${storeState.account.address}%0A`;
         }
-        if (storeState.account.ringbell) {
-          formattedText += `${this.$t('accountRingbell')}: ${storeState.account.ringbell}%0A`;
+        if (storeState.account.doorbell) {
+          formattedText += `${this.$t('accountRingbell')}: ${storeState.account.doorbell}%0A`;
         }
         if (storeState.account.phone) {
           formattedText += `${this.$t('accountPhone')}: ${storeState.account.phone}%0A`;

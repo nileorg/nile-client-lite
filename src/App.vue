@@ -35,7 +35,7 @@
           @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
           :placeholder="$t('accountRingbell')"
-          v-model="$store.state.account.ringbell"
+          v-model="$store.state.account.doorbell"
         />
         <input
           type="text"

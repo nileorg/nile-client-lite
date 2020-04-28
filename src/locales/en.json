@@ -19,6 +19,6 @@
   "accountAddress": "Address",
   "accountPhone": "Phone",
   "accountNotes": "Notes",
-  "accountRingbell": "Ringbell",
+  "accountRingbell": "Doorbell",
   "accountClose": "Close"
 }

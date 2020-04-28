@@ -22,7 +22,7 @@ export default new Vuex.Store({
       firstname: '',
       lastname: '',
       address: '',
-      ringbell: '',
+      doorbell: '',
       notes: '',
       phone: '',
     },
