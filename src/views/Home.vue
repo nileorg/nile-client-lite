@@ -8,8 +8,8 @@
       <div class="container">
         <div class="el-row">
           <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-12">
-            <h1>{{$t('message')}}</h1>
-            <p>description</p>
+            <h1>{{$t('title')}}</h1>
+            <p>{{$t('subtitle')}}</p>
           </div>
         </div>
       </div>
@@ -23,11 +23,11 @@
     <div class="el-row" style="background-color: #f5f8fa;">
       <div class="el-col el-col-24 el-col-xs-24 city-selector">
         <div style="padding-top: 30px; padding-left: 30px; padding-right: 30px;">
-          <h4 class="city-selector-label">Per iniziare seleziona la tua città</h4>
+          <h4 class="city-selector-label">{{$t('citySelectorTitle')}}</h4>
           <input
             type="text"
             class="el-input city-selector-filter"
-            placeholder="Ricerca la tua città"
+            :placeholder="$t('citySelectorFilter')"
           />
         </div>
         <carousel

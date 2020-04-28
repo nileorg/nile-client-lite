@@ -28,7 +28,7 @@
           <div class="el-col el-col-24">
             <p
               style="margin: 0; font-size: 13px;"
-            >Clicca sui tag per filtrare i negozi, riclicca per disabilitare</p>
+            >{{$t('tagFilterShops')}}</p>
             <carousel
               class="tag-carousel-available"
               :perPageCustom="[[0, 3], [768, 6], [1024, 7], [1240, 8]]"

@@ -24,6 +24,7 @@ export default new Vuex.Store({
       address: '',
       ringbell: '',
       notes: '',
+      phone: '',
     },
   },
   mutations: {

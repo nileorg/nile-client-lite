@@ -28,7 +28,7 @@
           <div class="el-col el-col-24">
             <p
               style="margin: 0; font-size: 13px;"
-            >Clicca sui tag per filtrare i negozi, riclicca per disabilitare</p>
+            >{{$t('tagFilterProducts')}}</p>
             <carousel
               class="tag-carousel-available"
               :perPageCustom="[[0, 3], [768, 6], [1024, 7], [1240, 8]]"
@@ -93,7 +93,7 @@
         <button
           class="el-button el-button-sm el-button--primary card-button add-to-cart-button"
           @click="() => addToCart(productQuantitySelector.name, productQuantitySelector.price, productQuantity)"
-        >AGGIUNGI</button>
+        >{{$t('cartAdd')}}</button>
       </div>
     </modal>
     <modal
@@ -103,7 +103,7 @@
       name="cart"
     >
       <div v-if="$store.state.cart.shop">
-        <h4>Cart</h4>
+        <h4>{{$t('cartTitle')}}</h4>
         <div
           class="cart-item"
           v-for="(_, product) in $store.state.cart.orders"
@@ -124,19 +124,27 @@
             <button
               class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
               @click="() => deleteFromCart(product)"
-            >-</button>
+            ><img src="@/assets/bin.svg"></button>
           </div>
         </div>
-        <textarea placeholder="Note..." class="custom-notes" v-model="$store.state.cart.notes"></textarea>
-        <b>Total: {{totalPrice}}€</b><br/>
+        <textarea
+          :placeholder="$t('cartNotes')"
+          class="custom-notes"
+          v-model="$store.state.cart.notes"
+          @change="() => $store.commit('saveOrder')"
+        ></textarea>
+        <b>{{$t('cartTotal')}}: {{totalPrice}}€</b><br/>
         <p v-html="address"></p>
-        <span class="edit-address" @click="() => {$modal.hide('cart'); $modal.show('account')}">Edit Address</span>
+        <span
+          class="edit-address"
+          @click="() => {$modal.hide('cart'); $modal.show('account')}"
+        >{{$t('cartEditAddress')}}</span>
         <button
             v-for="(contact, index) in shopData.contacts"
             :key="index"
             class="el-button el-button-sm el-button--primary card-button send-order-button"
             @click="() => sendOrder(contact.type, contact.value)"
-          >Send order via {{contact.type}}</button>
+          >{{$t('cartSendOrderVia')}} {{contact.type}}</button>
       </div>
     </modal>
     <v-dialog />
@@ -195,10 +203,23 @@ export default {
     },
     address() {
       const storeState = this.$store.state;
-      return `${storeState.account.firstname} ${storeState.account.lastname}<br/>
-      ${storeState.account.address}<br/>
-      ${storeState.account.ringbell}<br/>
-      ${storeState.account.notes}`;
+      let address = '';
+      if (storeState.account.firstname || storeState.account.lastname) {
+        address += `${storeState.account.firstname} ${storeState.account.lastname}<br/>`;
+      }
+      if (storeState.account.address) {
+        address += `${storeState.account.address}<br/>`;
+      }
+      if (storeState.account.ringbell) {
+        address += `${storeState.account.ringbell}<br/>`;
+      }
+      if (storeState.account.phone) {
+        address += `${storeState.account.phone}<br/>`;
+      }
+      if (storeState.account.notes) {
+        address += `${storeState.account.notes}`;
+      }
+      return address || this.$t('cartWarningEmptyAccount');
     },
   },
   mounted() {
@@ -232,7 +253,22 @@ export default {
         }
       }
       formattedText += `${notes}`;
-      formattedText += `%0ATotal: ${total}€`;
+      formattedText += `%0A${this.$t('cartTotal')}: ${total}€%0A`;
+      const storeState = this.$store.state;
+      if (storeState.account) {
+        if (storeState.account.address) {
+          formattedText += `${this.$t('accountAddress')}: ${storeState.account.address}%0A`;
+        }
+        if (storeState.account.ringbell) {
+          formattedText += `${this.$t('accountRingbell')}: ${storeState.account.ringbell}%0A`;
+        }
+        if (storeState.account.phone) {
+          formattedText += `${this.$t('accountPhone')}: ${storeState.account.phone}%0A`;
+        }
+        if (storeState.account.notes) {
+          formattedText += `${this.$t('accountNotes')}: ${storeState.account.notes}%0A`;
+        }
+      }
       switch (type) {
         case 'whatsapp':
           window.open(`https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`);
@@ -249,9 +285,9 @@ export default {
     },
     getButtonAction(product) {
       if (Object.keys(this.$store.state.cart.orders).includes(product.name)) {
-        return { label: 'Edit in cart', click: () => this.goToCart() };
+        return { label: this.$t('cartEdit'), click: () => this.goToCart() };
       }
-      return { label: 'Add to cart', click: () => this.openProductQuantitySelector(product) };
+      return { label: this.$t('cartAdd'), click: () => this.openProductQuantitySelector(product) };
     },
     deleteFromCart(product) {
       this.$delete(this.$store.state.cart.orders, product);
@@ -354,6 +390,10 @@ export default {
   width: 50px;
 }
 
+.remove-from-cart-button img {
+  height: 20px;
+}
+
 .add-to-cart-button {
   width: 150px;
 }
@@ -452,5 +492,6 @@ export default {
 .edit-address {
   text-decoration: underline;
   color: var(--primary);
+  cursor: pointer;
 }
 </style>

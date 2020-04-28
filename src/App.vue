@@ -8,41 +8,53 @@
       name="account"
     >
       <div>
-        <h4>ACCOUNT</h4>
+        <h4>{{$t('accountTitle')}}</h4>
         <input
           type="text"
+          @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
-          placeholder="Nome"
+          :placeholder="$t('accountFirstname')"
           v-model="$store.state.account.firstname"
         />
         <input
           type="text"
+          @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
-          placeholder="Cognome"
+          :placeholder="$t('accountLastname')"
           v-model="$store.state.account.lastname"
         />
         <input
           type="text"
+          @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
-          placeholder="Indirizzo"
+          :placeholder="$t('accountAddress')"
           v-model="$store.state.account.address"
         />
         <input
           type="text"
+          @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
-          placeholder="Campanello"
+          :placeholder="$t('accountRingbell')"
           v-model="$store.state.account.ringbell"
         />
         <input
           type="text"
+          @change="() => $store.commit('saveAccount')"
           class="el-input account-input"
-          placeholder="Note"
+          :placeholder="$t('accountPhone')"
+          v-model="$store.state.account.phone"
+        />
+        <input
+          type="text"
+          @change="() => $store.commit('saveAccount')"
+          class="el-input account-input"
+          :placeholder="$t('accountNotes')"
           v-model="$store.state.account.notes"
         />
         <button
           class="el-button el-button-sm el-button--primary card-button account-input"
-          @click="() => {$store.commit('saveAccount'); $modal.hide('account')}"
-        >SALVA</button>
+          @click="() => {$modal.hide('account')}"
+        >{{$t('accountClose')}}</button>
       </div>
     </modal>
     <router-view />
