@@ -186,7 +186,7 @@ export default {
     },
     productsFiltered() {
       if (this.activeTags.length > 0) {
-        return this.products.filter((shop) => shop.tags.some((r) => this.activeTags.includes(r)));
+        return this.products.filter((shop) => this.activeTags.every((r) => shop.tags.includes(r)));
       }
       return this.products;
     },

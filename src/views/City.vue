@@ -100,7 +100,7 @@ export default {
     },
     shopsFiltered() {
       if (this.activeTags.length > 0) {
-        return this.shops.filter((shop) => shop.tags.some((r) => this.activeTags.includes(r)));
+        return this.shops.filter((shop) => this.activeTags.every((r) => shop.tags.includes(r)));
       }
       return this.shops;
     },
