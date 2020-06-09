@@ -56,10 +56,7 @@
 
 <script>
 import Card from '@/components/Card.vue';
-import hash from '@/hash.js';
-import {
-  Buffer,
-} from 'ipfs';
+import fetchCities from '@/services/cities';
 
 export default {
   name: 'Home',
@@ -83,36 +80,27 @@ export default {
   },
   mounted() {
     if (this.$store.state.city && this.$store.state.city.link) {
-      this.$router.push({ name: 'City', params: { city: this.$store.state.city } });
+      this.$router.push({
+        name: 'City',
+        params: {
+          city: this.$store.state.city,
+          cityLink: this.$store.state.city.link,
+        },
+      });
     } else {
-      this.fetchCities();
+      fetchCities.bind(this)();
     }
   },
   methods: {
     openCity(city) {
       this.$store.commit('setCity', city);
-      this.$router.push({ name: 'City', params: { city } });
-    },
-    async fetchCities() {
-      let ipfs;
-      try {
-        ipfs = await this.$ipfs;
-        this.ipfsStatus = true;
-      } catch (err) {
-        this.ipfsStatus = false;
-        return;
-      }
-      this.$store.commit('setHash', hash);
-      const chunks = [];
-      /* eslint-disable-next-line no-restricted-syntax */
-      for await (const chunk of ipfs.cat(hash)) {
-        chunks.push(chunk);
-      }
-      try {
-        this.cities = JSON.parse(Buffer.concat(chunks).toString());
-      } catch (err) {
-        this.cities = [];
-      }
+      this.$router.push({
+        name: 'City',
+        params: {
+          city,
+          cityLink: this.$store.state.city.link,
+        },
+      });
     },
   },
 };

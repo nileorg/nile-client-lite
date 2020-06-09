@@ -71,12 +71,14 @@
 <script>
 import Card from '@/components/Card.vue';
 import hash from '@/hash';
-import { Buffer } from 'ipfs';
+import fetchCities from '@/services/cities';
+import fetchShops from '@/services/shops';
 
 export default {
   name: 'City',
   props: {
     city: Object,
+    cityLink: String,
   },
   components: {
     Card,
@@ -84,6 +86,7 @@ export default {
   data() {
     return {
       ipfsStatus: false,
+      cities: [],
       shops: [],
       error: false,
       cityData: {},
@@ -105,20 +108,22 @@ export default {
       return this.shops;
     },
   },
-  mounted() {
-    if (hash !== this.$store.state.hash) {
+  async mounted() {
+    if (this.cityLink) {
+      await fetchCities.bind(this)();
+      this.cityData = this.cities.find((city) => city.link === this.cityLink);
+    } else if (hash !== this.$store.state.hash) {
       this.backToCitySelector();
+      return;
+    } else if (this.city) {
+      this.cityData = this.city;
+    } else if (this.$store.state.city) {
+      this.cityData = this.$store.state.city;
+    }
+    if (this.cityData && this.cityData.link) {
+      fetchShops.bind(this)(this.cityData.link);
     } else {
-      if (this.city) {
-        this.cityData = this.city;
-      } else if (this.$store.state.city) {
-        this.cityData = this.$store.state.city;
-      }
-      if (this.cityData && this.cityData.link) {
-        this.fetchShops(this.cityData.link);
-      } else {
-        this.backToCitySelector();
-      }
+      this.backToCitySelector();
     }
   },
   methods: {
@@ -136,27 +141,14 @@ export default {
     },
     openShop(shop) {
       this.$store.commit('setShop', shop);
-      this.$router.push({ name: 'Shop', params: { shop } });
-    },
-    async fetchShops(link) {
-      let ipfs;
-      try {
-        ipfs = await this.$ipfs;
-        this.ipfsStatus = true;
-      } catch (err) {
-        this.ipfsStatus = false;
-        return;
-      }
-      const chunks = [];
-      /* eslint-disable-next-line no-restricted-syntax */
-      for await (const chunk of ipfs.cat(link)) {
-        chunks.push(chunk);
-      }
-      try {
-        this.shops = JSON.parse(Buffer.concat(chunks).toString());
-      } catch (err) {
-        this.shops = [];
-      }
+      this.$router.push({
+        name: 'Shop',
+        params: {
+          shop,
+          cityLink: this.cityData.link,
+          shopLink: shop.link,
+        },
+      });
     },
   },
 };

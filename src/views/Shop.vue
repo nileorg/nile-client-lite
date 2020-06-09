@@ -156,11 +156,14 @@ import Card from '@/components/Card.vue';
 import hash from '@/hash.js';
 import { Buffer } from 'ipfs';
 import chunk from 'chunk';
+import fetchShops from '@/services/shops';
 
 export default {
   name: 'Shop',
   props: {
     shop: Object,
+    cityLink: String,
+    shopLink: String,
   },
   components: {
     Card,
@@ -174,6 +177,7 @@ export default {
       activeTags: [],
       productQuantitySelector: null,
       productQuantity: 1,
+      shops: [],
     };
   },
   computed: {
@@ -226,21 +230,23 @@ export default {
       return address || this.$t('cartWarningEmptyAccount');
     },
   },
-  mounted() {
-    if (hash !== this.$store.state.hash) {
+  async mounted() {
+    if (this.cityLink) {
+      await fetchShops.bind(this)(this.cityLink);
+      this.shopData = this.shops.find((shop) => shop.link === this.shopLink);
+    } else if (hash !== this.$store.state.hash) {
       this.$store.commit('setShop', null);
       this.$router.push({ name: 'City' });
+      return;
+    } else if (this.shop) {
+      this.shopData = this.shop;
     } else {
-      if (this.shop) {
-        this.shopData = this.shop;
-      } else {
-        this.shopData = this.$store.state.shop;
-      }
-      if (this.shopData.link) {
-        this.fetchProducts(this.shopData.link);
-      } else {
-        this.error = true;
-      }
+      this.shopData = this.$store.state.shop;
+    }
+    if (this.shopData.link) {
+      this.fetchProducts(this.shopData.link);
+    } else {
+      this.error = true;
     }
   },
   methods: {
@@ -343,7 +349,12 @@ export default {
     leaveShop() {
       this.$store.commit('emptyCart');
       this.$store.commit('setShop', null);
-      this.$router.push({ name: 'City' });
+      this.$router.push({
+        name: 'City',
+        params: {
+          cityLink: this.cityLink,
+        },
+      });
     },
     backToCity() {
       if (Object.keys(this.$store.state.cart.orders).length === 0) {
