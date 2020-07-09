@@ -136,15 +136,40 @@
         <br />
         <p v-html="address"></p>
         <span
-          class="edit-address"
+          class="button-text"
           @click="() => {$modal.hide('cart'); $modal.show('account')}"
         >{{$t('cartEditAddress')}}</span>
-        <button
-          v-for="(contact, index) in shopData.contacts"
-          :key="index"
-          class="el-button el-button-sm el-button--primary card-button send-order-button"
-          @click="() => sendOrder(contact.type, contact.value)"
-        >{{$t('cartSendOrderVia')}} {{contact.type}}</button>
+        <div v-if="!payed">
+          <p>
+            {{$t('payOrderInstruction')}}
+          </p>
+          <button
+            v-for="(method, index) in shopData.paymentMethods"
+            :key="index"
+            class="el-button el-button-sm el-button--primary card-button send-order-button"
+            @click="() => {payOrder(method.type, method.value)}"
+          >
+            {{method.type === 'cash' ? $t('payOrderCash') : `${$t('payOrderVia')} ${method.type}`}}
+          </button>
+        </div>
+        <div v-else>
+          <p>
+            <span
+              class="button-text"
+              @click="() => payed=false"
+            >
+              {{$t('payOrderCancel')}}
+            </span>
+          </p>
+          <button
+            v-for="(contact, index) in shopData.contacts"
+            :key="index"
+            class="el-button el-button-sm el-button--primary card-button send-order-button"
+            @click="() => sendOrder(contact.type, contact.value)"
+          >
+            {{$t('cartSendOrderVia')}} {{contact.type}}
+          </button>
+        </div>
       </div>
     </modal>
     <v-dialog />
@@ -178,6 +203,7 @@ export default {
       productQuantitySelector: null,
       productQuantity: 1,
       shops: [],
+      payed: false,
     };
   },
   computed: {
@@ -250,15 +276,38 @@ export default {
     }
   },
   methods: {
-    sendOrder(type, contact) {
-      let formattedText = '';
+    calculateTotal() {
       let total = 0;
-      const { orders, notes } = this.$store.state.cart;
+      const { orders } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
       for (const product in orders) {
         if (orders[product]) {
           const { quantity, price } = orders[product];
           total += price * quantity;
+        }
+      }
+      return total;
+    },
+    payOrder(type, value) {
+      const total = this.calculateTotal();
+      switch (type) {
+        case 'satispay':
+          window.open(
+            `https://tag.satispay.com/${value}/${total}`,
+          );
+          break;
+        default:
+      }
+      this.payed = true;
+    },
+    sendOrder(type, contact) {
+      let formattedText = '';
+      const total = this.calculateTotal();
+      const { orders, notes } = this.$store.state.cart;
+      /* eslint-disable-next-line no-restricted-syntax */
+      for (const product in orders) {
+        if (orders[product]) {
+          const { quantity, price } = orders[product];
           formattedText += `${quantity} x ${product} - ${price}€ = ${price
             * quantity}€%0A`;
         }
@@ -519,7 +568,7 @@ export default {
   }
 }
 
-.edit-address {
+.button-text {
   text-decoration: underline;
   color: var(--primary);
   cursor: pointer;
