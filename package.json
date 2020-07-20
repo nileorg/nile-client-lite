@@ -11,7 +11,7 @@
   "dependencies": {
     "chunk": "^0.0.2",
     "core-js": "^3.6.4",
-    "ipfs": "^0.43.0",
+    "ipfs": "^0.48.0",
     "v-clipboard": "^2.2.2",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
