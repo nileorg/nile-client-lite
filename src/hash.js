@@ -1,1 +1,1 @@
-export default 'QmUhTdaYWTMQakHG66dURaAgP3Z9NUSXgvXQxacBWEPrbQ';
+export default 'QmVSpnKXMcuTSiay33hQ1mBfqWpLj9iFxJismaATdUGyRv';
