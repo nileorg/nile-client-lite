@@ -13,5 +13,7 @@ jobs:
         with:
           add: src/hash.js
           message: 'chore(hash): update hash'
+          author_name: EgidioCaprino
+          author_email: egidio.caprino@gmail.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
