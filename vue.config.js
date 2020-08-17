@@ -1,14 +1,17 @@
 module.exports = {
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module.rule('eslint').use('eslint-loader').options({
-      fix: true
-    })
+      fix: true,
+    });
     config
       .plugin('html')
-      .tap(args => {
-        args[0].title = 'Nile'
-        return args
-      })
+      .tap(([firstArgument, ...rest]) => [
+        {
+          ...firstArgument,
+          title: 'Nile',
+        },
+        ...rest,
+      ]);
   },
   pluginOptions: {
     i18n: {
