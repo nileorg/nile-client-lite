@@ -31,6 +31,7 @@
   "aboutFree": "Gratuito",
   "aboutFreeDescription": "Nile è completamente gratuito. Nessuna commissione per il negoziante, né per i suoi clienti. Per sempre.",
   "aboutDecentralized": "Decentralizzato",
+  "aboutDecentralizedDescription": "Nile non gira su di un server. Si basa su di una rete controllata dalla sua community. I negozi si connettono dirrettamente alla rete Nile per mettere in vendita i loro prodotti.",
   "aboutLocal": "Locale",
   "aboutLocalDescription": "Cerca tra i negozi nella tua città. Ritira il tuo ordine direttamente in negozio oppure fattelo consegnare a casa."
 }
