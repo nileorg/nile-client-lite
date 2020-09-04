@@ -26,5 +26,11 @@
   "accountRingbell": "Campanello",
   "accountClose": "Chiudere",
   "languageTitle": "Seleziona la lingua",
-  "about": "Cos'è Nile"
+  "about": "Cos'è Nile",
+  "aboutDescription": "Nile è un ecommerce locale decentralizzato, gratuito per tutti per sempre.",
+  "aboutFree": "Gratuito",
+  "aboutFreeDescription": "Nile è completamente gratuito. Nessuna commissione per il negoziante, né per i suoi clienti. Per sempre.",
+  "aboutDecentralized": "Decentralizzato",
+  "aboutLocal": "Locale",
+  "aboutLocalDescription": "Cerca tra i negozi nella tua città. Ritira il tuo ordine direttamente in negozio oppure fattelo consegnare a casa."
 }
