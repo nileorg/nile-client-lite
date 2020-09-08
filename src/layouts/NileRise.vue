@@ -11,6 +11,13 @@
             <h1>{{$t('title')}}</h1>
             <p>{{$t('subtitle')}}</p>
           </div>
+          <el-row>
+            <el-col>
+              <p class="links">
+                <el-link type="primary" href="/#/about">About</el-link>
+              </p>
+            </el-col>
+          </el-row>
         </div>
       </div>
       <div class="earth-wrapper animation-target">
@@ -27,3 +34,9 @@
 <script>
 export default {};
 </script>
+
+<style scoped>
+  .links a {
+    font-size: 200%;
+  }
+</style>
