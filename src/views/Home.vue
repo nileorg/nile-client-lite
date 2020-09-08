@@ -1,25 +1,5 @@
 <template>
-  <div class="home">
-    <div
-      class="section section--hero"
-      id="home"
-      :style="`background-image: url('${require('../assets/home_hero.jpg')}');`"
-    >
-      <div class="container">
-        <div class="el-row">
-          <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-12">
-            <h1>{{$t('title')}}</h1>
-            <p>{{$t('subtitle')}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="earth-wrapper animation-target">
-        <img alt="earth" src="../assets/earth.svg" class="earth rotating" />
-      </div>
-      <div class="hero-divider" style="width: 100vw;">
-        <img alt="divider" src="../assets/divider_grey.svg" class="divider" />
-      </div>
-    </div>
+  <nile-rise-layout>
     <div class="el-row" style="background-color: #f5f8fa;">
       <div class="el-col el-col-24 el-col-xs-24 city-selector">
         <div style="padding-top: 30px; padding-left: 30px; padding-right: 30px;">
@@ -51,17 +31,19 @@
         </carousel>
       </div>
     </div>
-  </div>
+  </nile-rise-layout>
 </template>
 
 <script>
 import Card from '@/components/Card.vue';
 import fetchCities from '@/services/cities';
+import NileRiseLayout from '../layouts/NileRise.vue';
 
 export default {
   name: 'Home',
   components: {
     Card,
+    NileRiseLayout,
   },
   data() {
     return {

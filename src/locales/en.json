@@ -25,5 +25,13 @@
   "accountNotes": "Notes",
   "accountRingbell": "Doorbell",
   "accountClose": "Close",
-  "languageTitle": "Select language"
+  "languageTitle": "Select language",
+  "about": "About Nile",
+  "aboutDescription": "Nile is a decentralized, forever free for everyone, local ecommerce platform.",
+  "aboutFree": "Free",
+  "aboutFreeDescription": "Nile is completely free. No commission for the shop, nor for the customer. Forefer.",
+  "aboutDecentralized": "Decentralized",
+  "aboutDecentralizedDescription": "Nile doesn't run on a server. It runs on a network controlled by its community. Shops directly connect to Nile network for selling their products.",
+  "aboutLocal": "Local",
+  "aboutLocalDescription": "Search for shops in your city. Collect your order directly in the store or have it delivered to your place."
 }
