@@ -1,4 +1,3 @@
-import hash from '@/hash.js';
 import {
   Buffer,
 } from 'ipfs';
@@ -12,10 +11,10 @@ export default async function fetchCities() {
     this.ipfsStatus = false;
     return;
   }
-  this.$store.commit('setHash', hash);
+  this.$store.commit('setHash', window.hash);
   const chunks = [];
   /* eslint-disable-next-line no-restricted-syntax */
-  for await (const chunk of ipfs.cat(hash)) {
+  for await (const chunk of ipfs.cat(window.hash)) {
     chunks.push(chunk);
   }
   try {

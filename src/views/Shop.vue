@@ -178,7 +178,6 @@
 
 <script>
 import Card from '@/components/Card.vue';
-import hash from '@/hash.js';
 import { Buffer } from 'ipfs';
 import chunk from 'chunk';
 import fetchShops from '@/services/shops';
@@ -260,7 +259,7 @@ export default {
     if (this.cityLink) {
       await fetchShops.bind(this)(this.cityLink);
       this.shopData = this.shops.find((shop) => shop.link === this.shopLink);
-    } else if (hash !== this.$store.state.hash) {
+    } else if (window.hash !== this.$store.state.hash) {
       this.$store.commit('setShop', null);
       this.$router.push({ name: 'City' });
       return;

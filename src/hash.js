@@ -1,1 +1,0 @@
-export default 'QmRBnAhEw5vBxbQmLyPPXCzqGnWoqkpQgJn4QQtuKTG4Tn';
