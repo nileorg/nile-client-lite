@@ -12,15 +12,12 @@
           >
             <h1>Nile</h1>
             <p>
-              Testi di prova, serviranno per spiegare cos'è Nile. Testi di
-              prova, serviranno per spiegare cos'è Nile. Testi di prova,
-              serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
-              Testi di prova, serviranno per spiegare cos'è Nile.
+              Viviamo in una società in cui le grandi aziende hanno il potere di
+              influenzare le economie e le tendenze. Oggi le grandi aziende che
+              possiedono il mercato online non pagano le tasse, non pagano le
+              imposte, non pagano i loro dipendenti e stanno perturbando le
+              economie locali. Pensiamo che il mondo meriti un'alternativa
+              migliore, così decidiamo di fondare Nile
             </p>
           </div>
         </div>
@@ -41,14 +38,11 @@
           <div
             class="el-col el-col-24 el-col-sm-18 el-col-md-12 el-col-lg-12 center"
           >
-            <h2>Ecosystem</h2>
+            <h2>Ecosistema</h2>
             <p>
-              Who needs to be empowered to let local economies flourish again?
-              Its the people, the ones that want to sell something - called
-              vendors, the ones that want to ship something - called delivery
-              and the ones that want to buy something - called buyers. So to
-              strengthen local economies we have three groups of people with
-              different problems and requirements.
+              Nile è una piattaforma costruita per rinnovare le economie locali
+              dando a negozi e utenti uno strumento che li metta in contatto
+              privatamente e senza alcuna commissione.
             </p>
           </div>
         </div>
@@ -63,13 +57,17 @@
             <div>
               <div class="card active">
                 <img alt="Shop" :src="require('../assets/shop-circled.jpg')" />
-                <h3>Shop</h3>
+                <h3>Negozio</h3>
                 <p>
-                  Think of small businesses like bakeries, joineries and flower
-                  shops selling products. Or think of hair studios, doctors
-                  offices and repair shops selling services. We can even think
-                  of usual people selling art, honey and services they do hobby
-                  wise.
+                  Pubblicare il tuo negozio su Nile è semplice, basta inviarci
+                  il tuo menù.<br />
+                  Un solo costo iniziale di 349€.
+                  <br /><br />
+                  <strong>Ogni modifica al menù, ogni ordine: gratuito.</strong>
+                  <br /><br />
+                  <button class="el-button el-button-sm el-button--primary">
+                    Unisciti a Nile
+                  </button>
                 </p>
               </div>
             </div>
@@ -80,13 +78,16 @@
           >
             <div class="card active">
               <img alt="Buyer" :src="require('../assets/buyer-circled.jpg')" />
-              <h3>Buyer</h3>
+              <h3>Utente</h3>
               <p>
-                More and more people get aware of the importance of local
-                economies. Empowering people with a platform to have a great
-                service quality but supporting local people instead of giant
-                cooperations has the potential to transform the awareness into
-                action.
+                Se hai già fatto acquisti online sarai a tuo agio con la
+                piattaforma. Puoi pagare in cash o comodamente online.
+                <br /><br />
+                <strong>Comunicazione privata e zero commissioni</strong>
+                <br /><br />
+                <button class="el-button el-button-sm el-button--primary">
+                  Entra in Nile
+                </button>
               </p>
             </div>
           </div>
@@ -103,14 +104,8 @@
             class="el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-12"
             style="padding-left: 30px; padding-right: 30px"
           >
-            <h2>Shop</h2>
-            <p>
-              There are many different businesses and people that are already
-              selling products or services, but many of them does not have the
-              capacities nor the money to conquer the web and there might also
-              be even more people that have the potential but not yet the
-              platform to do so.
-            </p>
+            <h2>Negozio</h2>
+            <p>In tre step saprai usare Nile.</p>
             <div>
               <div class="el-collapse">
                 <div class="el-collapse-item">
@@ -118,7 +113,7 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4><span class="counter">1</span>Get started</h4>
+                    <h4><span class="counter">1</span>Iniziamo</h4>
                   </div>
                   <div
                     class="collapse-transition"
@@ -130,11 +125,20 @@
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
                         <div>
-                          Initially a shop owner needs to create a digital twin
-                          for the shop, so he defines his products blueprints
-                          and the initial inventory. Later he decides how to get
-                          paid from a list of existing payment system and how to
-                          deliver his products.
+                          Per prima cosa, invia il tuo menù a
+                          <strong>hello@nile.shopping</strong><br />
+                          Nella email includi le seguenti informazioni del tuo
+                          negozio:
+                          <ul>
+                            <li>Nome</li>
+                            <li>Descrizione</li>
+                            <li>Immagine di copertina</li>
+                            <li>Logo</li>
+                            <li>Contatto telefonico</li>
+                            <li>Account Satispay</li>
+                          </ul>
+                          Infine aspetta la nostra risposta, nel giro di poche
+                          ore puoi già essere online
                         </div>
                       </div>
                     </div>
@@ -145,14 +149,14 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4><span class="counter">2</span>Inventory Management</h4>
+                    <h4><span class="counter">2</span>Ricevi gli ordini</h4>
                   </div>
                   <div>
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
                         <div>
-                          Everytime the shop owner gets new supplies or produces
-                          new products he needs to update his inventory.
+                          Ricevi gli ordini sui tuoi metodi di contatto
+                          preferiti: whatsapp, telegram, email, sms.
                         </div>
                       </div>
                     </div>
@@ -163,39 +167,12 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4>
-                      <span class="counter">3</span>Boosted 🚀 order management
-                    </h4>
+                    <h4><span class="counter">3</span>Consegna la merce</h4>
                   </div>
                   <div>
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
-                        <div>
-                          Each time a buyer buys a product an order gets
-                          created. The show owner can manage information about
-                          the order and send various feedback to the buyer such
-                          as timers (so the buyer know how long it will take to
-                          receive the order) and the location of the product.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="el-collapse-item">
-                  <div class="el-collapse-item__header">
-                    <i
-                      class="el-collapse-item__header__arrow el-icon-arrow-right"
-                    ></i>
-                    <h4><span class="counter">4</span>Cashier System</h4>
-                  </div>
-                  <div>
-                    <div class="el-collapse-item__wrap">
-                      <div class="el-collapse-item__content">
-                        <div>
-                          Most shop owners also have buyers on site. To keep the
-                          inventory updated they simply can use the cashier
-                          system.
-                        </div>
+                        <div>Nile non include un servizio di consegna.</div>
                       </div>
                     </div>
                   </div>
@@ -210,7 +187,7 @@
             <img
               alt="Shop"
               :src="require('../assets/shop-circled.jpg')"
-              class="react-reveal circle"
+              class="circle"
             />
           </div>
         </div>
@@ -226,14 +203,8 @@
             class="el-col el-col-24 el-col-xs-24 el-col-sm-16 el-col-md-12 el-col-lg-12"
             style="padding-left: 30px; padding-right: 30px"
           >
-            <h2>Buyer</h2>
-            <p>
-              There are many different businesses and people that are already
-              selling products or services, but many of them does not have the
-              capacities nor the money to conquer the web and there might also
-              be even more people that have the potential but not yet the
-              platform to do so.
-            </p>
+            <h2>Utente</h2>
+            <p>Come usare Nile? Niente di più semplice</p>
             <div>
               <div class="el-collapse">
                 <div class="el-collapse-item">
@@ -241,7 +212,7 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4><span class="counter">1</span>Get started</h4>
+                    <h4><span class="counter">1</span>Inserisci i tuoi dati</h4>
                   </div>
                   <div
                     class="collapse-transition"
@@ -253,11 +224,12 @@
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
                         <div>
-                          Initially a shop owner needs to create a digital twin
-                          for the shop, so he defines his products blueprints
-                          and the initial inventory. Later he decides how to get
-                          paid from a list of existing payment system and how to
-                          deliver his products.
+                          Nile non richiede una login, non raccogliamo alcun
+                          dato su di te. La prima volta che entri in piattaforma
+                          inserisci i tuoi dati. Rimarrano sul tuo
+                          dispositivo.<br />
+                          Puoi modificare i tuoi dati premendo l'icona
+                          dell'utente in alto a destra in qualsiasi momento.
                         </div>
                       </div>
                     </div>
@@ -268,14 +240,15 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4><span class="counter">2</span>Inventory Management</h4>
+                    <h4><span class="counter">2</span>Seleziona la città</h4>
                   </div>
                   <div>
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
                         <div>
-                          Everytime the shop owner gets new supplies or produces
-                          new products he needs to update his inventory.
+                          Entra nella città ed esplora i negozi. Puoi usare i
+                          comodi filtri in alto per cercare specifiche categorie
+                          di prodotti.
                         </div>
                       </div>
                     </div>
@@ -286,38 +259,15 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4>
-                      <span class="counter">3</span>Boosted 🚀 order management
-                    </h4>
+                    <h4><span class="counter">3</span>Acquista</h4>
                   </div>
                   <div>
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
                         <div>
-                          Each time a buyer buys a product an order gets
-                          created. The show owner can manage information about
-                          the order and send various feedback to the buyer such
-                          as timers (so the buyer know how long it will take to
-                          receive the order) and the location of the product.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="el-collapse-item">
-                  <div class="el-collapse-item__header">
-                    <i
-                      class="el-collapse-item__header__arrow el-icon-arrow-right"
-                    ></i>
-                    <h4><span class="counter">4</span>Cashier System</h4>
-                  </div>
-                  <div>
-                    <div class="el-collapse-item__wrap">
-                      <div class="el-collapse-item__content">
-                        <div>
-                          Most shop owners also have buyers on site. To keep the
-                          inventory updated they simply can use the cashier
-                          system.
+                          Seleziona il negozio e aggiungi i prodotti al
+                          carrello. Quando sei pronto premi sull'icona del
+                          carrello in basso a destra e concludi il tuo ordine.
                         </div>
                       </div>
                     </div>
@@ -333,7 +283,7 @@
             <img
               alt="Buyer"
               :src="require('../assets/buyer-circled.jpg')"
-              class="react-reveal circle"
+              class="circle"
             />
           </div>
         </div>
@@ -348,40 +298,15 @@
           <div
             class="el-col el-col-24 el-col-sm-18 el-col-md-12 el-col-lg-12 center"
           >
-            <h2
-              class="react-reveal"
-              style="
-                animation-fill-mode: both;
-                animation-duration: 1000ms;
-                animation-delay: 0ms;
-                animation-iteration-count: 1;
-                opacity: 1;
-                animation-name: react-reveal-784081678661340-2;
-              "
-            >
-              Mission
-            </h2>
-            <p
-              class="react-reveal"
-              style="
-                animation-fill-mode: both;
-                animation-duration: 1000ms;
-                animation-delay: 0ms;
-                animation-iteration-count: 1;
-                opacity: 1;
-                animation-name: react-reveal-784081678661340-2;
-              "
-            >
-              Nile’s mission is to provide local economies with tools to compete
-              with global giants. Today, global monopolies are putting local
-              economies at risk, by offering better and faster services. People
-              are buying almost everything from some global giants instead of
-              supporting local markets. We deeply believe that this can and has
-              to be changed by ourselves, the usual people. It is time for Nile
-              and those who share our mission to design a better way of commerce
-              for a better tomorrow. We invite everybody out there that shares
-              our mission and believes to stand up for an open and free set of
-              tools to promote local economies.
+            <h2>Mission</h2>
+            <p>
+              La missione di Nile è di fornire alle economie locali gli
+              strumenti per competere con i giganti globali. Oggi, i monopoli
+              globali stanno mettendo a rischio le economie locali, offrendo
+              servizi migliori e più veloci. Crediamo profondamente che questo
+              possa e debba essere cambiato da noi, nel nostro piccolo. È tempo
+              per Nile e per coloro che condividono la nostra missione di
+              progettare un modo migliore di acquistare per un domani migliore.
             </p>
           </div>
         </div>
@@ -393,27 +318,17 @@
             class="el-col el-col-24 el-col-sm-18 el-col-md-8 el-col-lg-8 center"
             style="padding-left: 30px; padding-right: 30px"
           >
-            <div
-              class="react-reveal"
-              style="
-                animation-fill-mode: both;
-                backface-visibility: visible;
-                animation-duration: 1000ms;
-                animation-delay: 0ms;
-                animation-iteration-count: 1;
-                opacity: 1;
-                animation-name: react-reveal-784081678661340-3;
-              "
-            >
+            <div>
               <div class="card active">
                 <img alt="Privacy" :src="require('../assets/privacy.svg')" />
                 <h3>Privacy</h3>
                 <p>
-                  Data protection and user privacy is a huge topic today. The
-                  public information is published on decentralized storage and
-                  all users private data is just saved on the user’s devices. A
-                  buyer shares the required information only with the people
-                  involved in the order.
+                  La protezione dei dati e la privacy degli utenti è un
+                  argomento enorme oggi. Le informazioni pubbliche sono
+                  pubblicate su uno storage decentralizzato e tutti i dati
+                  privati dell'utente sono solo salvati solo sul suo
+                  dispositivo. Un acquirente condivide le informazioni richieste
+                  solo con il venditore coinvolto nell'ordine.
                 </p>
               </div>
             </div>
@@ -422,29 +337,21 @@
             class="el-col el-col-24 el-col-sm-18 el-col-md-8 el-col-lg-8 center"
             style="padding-left: 30px; padding-right: 30px"
           >
-            <div
-              class="react-reveal"
-              style="
-                animation-fill-mode: both;
-                backface-visibility: visible;
-                animation-duration: 1000ms;
-                animation-delay: 0ms;
-                animation-iteration-count: 1;
-                opacity: 1;
-                animation-name: react-reveal-784081678661340-3;
-              "
-            >
+            <div>
               <div class="card active">
                 <img
                   alt="100% Free - Forever!"
                   :src="require('../assets/feeless.svg')"
                 />
-                <h3>Commission Free - Forever!</h3>
+                <h3>Zero commissioni - per sempre.</h3>
                 <p>
-                  Nile does not have fees at any level - it is 100%
-                  commission-free. Nile will always be free. There won’t be any
-                  extra pay features nor a pro version. The complete code is
-                  open source and free to use.
+                  Il codice di Nile è open source, la comunicazione
+                  utente-venditore è privata, l'acquisto è senza commissioni*
+                  <br /><br />
+                  <small
+                    >* Le commissioni del metodo di pagamento utilizzato non
+                    dipendono da Nile.</small
+                  >
                 </p>
               </div>
             </div>
@@ -453,28 +360,20 @@
             class="el-col el-col-24 el-col-sm-18 el-col-md-8 el-col-lg-8 center"
             style="padding-left: 30px; padding-right: 30px"
           >
-            <div
-              class="react-reveal"
-              style="
-                animation-fill-mode: both;
-                backface-visibility: visible;
-                animation-duration: 1000ms;
-                animation-delay: 0ms;
-                animation-iteration-count: 1;
-                opacity: 1;
-                animation-name: react-reveal-784081678661340-3;
-              "
-            >
+            <div>
               <div class="card active">
                 <img
-                  alt="Permissionless"
+                  style="opacity: 0"
+                  alt="Semplice"
                   :src="require('../assets/permissionless.svg')"
                 />
-                <h3>Permissionless</h3>
+                <h3>Semplice</h3>
                 <p>
-                  Everyone can join the system without any registration hurdles.
-                  Even when you are signed in you can interact anonymously with
-                  other people in your ecosystem.
+                  Nile è pensato per tutti.<br />Il venditore non deve imparare
+                  nessun nuovo strumento, l'utente si orienta da solo nella
+                  piattaforma. <br /><br />
+                  La tecnologia di Nile si basa sulle solide tecnologie web e
+                  IPFS.
                 </p>
               </div>
             </div>
@@ -513,6 +412,14 @@ export default {
   color: var(--dark);
   text-decoration: none;
   text-align: center;
+}
+@media only screen and (max-width: 520px) {
+  .card {
+    margin-bottom: 20px;
+  }
+  .el-col > .circle {
+    display: none;
+  }
 }
 .center {
   text-align: center;
