@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import City from '@/views/City.vue';
 import Shop from '@/views/Shop.vue';
+import Landing from '@/views/Landing.vue';
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing,
   },
   {
     path: '/:cityUid',
