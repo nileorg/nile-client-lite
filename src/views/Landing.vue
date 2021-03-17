@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable max-len -->
   <div class="home">
     <div
       class="section section--hero"
@@ -65,9 +66,12 @@
                   <br /><br />
                   <strong>Ogni modifica al menù, ogni ordine: gratuito.</strong>
                   <br /><br />
-                  <button class="el-button el-button-sm el-button--primary">
+                  <a
+                    class="el-button el-button-sm el-button--primary"
+                    href="mailto:hello@nile.shopping?subject=Richesta%20iscrizione&body=Includere%20nella%20email%3A%20Nome%2C%20Descrizione%2C%20Immagine%20di%20copertina%2C%20Logo%2C%20Contatto%20telefonico%2C%20Account%20Satispay"
+                  >
                     Unisciti a Nile
-                  </button>
+                  </a>
                 </p>
               </div>
             </div>
@@ -85,9 +89,12 @@
                 <br /><br />
                 <strong>Comunicazione privata e zero commissioni</strong>
                 <br /><br />
-                <button class="el-button el-button-sm el-button--primary">
+                <a
+                  class="el-button el-button-sm el-button--primary"
+                  href="https://app.nile.shopping"
+                >
                   Entra in Nile
-                </button>
+                </a>
               </p>
             </div>
           </div>
