@@ -11,7 +11,7 @@
   "cartTotal": "Totale",
   "cartNotes": "Note",
   "cartEditAddress": "Modifica indirizzo",
-  "cartWarningEmptyAccount": "Nessun indirizzo è impostato",
+  "cartWarningEmptyAccount": "⚠️ Nessun indirizzo è impostato",
   "payOrderInstruction": "Dopo aver effettuato il pagamento torna su questa pagina e invia l'ordine.",
   "payOrderVia": "Paga ordine via",
   "payOrderCash": "Paga ordine in contanti",

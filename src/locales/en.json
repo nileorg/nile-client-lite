@@ -11,7 +11,7 @@
   "cartTotal": "Total",
   "cartNotes": "Notes",
   "cartEditAddress": "Edit address",
-  "cartWarningEmptyAccount": "No address is set",
+  "cartWarningEmptyAccount": "⚠️ No address is set",
   "payOrderInstruction": "After you complete the payment, return to this page and send the order",
   "payOrderVia": "Pay order via",
   "payOrderCash": "Pay order in cash",
