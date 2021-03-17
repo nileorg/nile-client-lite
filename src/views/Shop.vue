@@ -274,6 +274,9 @@ export default {
     } else {
       this.shopData = this.$store.state.shop;
     }
+    if (this.$store.state.cart.shop !== this.shopUid) {
+      this.$store.commit('emptyCart');
+    }
     if (this.shopData.link) {
       this.fetchProducts(this.shopData.link);
     } else {
@@ -386,7 +389,7 @@ export default {
         name,
         price,
         quantity,
-        shop: this.shopData.name,
+        shop: this.shopData.uid,
       });
       this.$modal.hide('product-quantity-selector');
       this.productQuantitySelector = null;
