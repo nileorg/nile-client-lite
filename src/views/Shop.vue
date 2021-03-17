@@ -181,13 +181,16 @@ import Card from '@/components/Card.vue';
 import { Buffer } from 'ipfs';
 import chunk from 'chunk';
 import fetchShops from '@/services/shops';
+import fetchCities from '@/services/cities';
 
 export default {
   name: 'Shop',
   props: {
     shop: Object,
     cityLink: String,
+    cityUid: String,
     shopLink: String,
+    shopUid: String,
   },
   components: {
     Card,
@@ -203,6 +206,7 @@ export default {
       productQuantity: 1,
       shops: [],
       payed: false,
+      cities: [],
     };
   },
   computed: {
@@ -256,9 +260,11 @@ export default {
     },
   },
   async mounted() {
-    if (this.cityLink) {
-      await fetchShops.bind(this)(this.cityLink);
-      this.shopData = this.shops.find((shop) => shop.link === this.shopLink);
+    if (this.cityUid) {
+      await fetchCities.bind(this)();
+      const cityData = this.cities.find((city) => city.uid === this.cityUid);
+      await fetchShops.bind(this)(cityData.link);
+      this.shopData = this.shops.find((shop) => shop.uid === this.shopUid);
     } else if (window.hash !== this.$store.state.hash) {
       this.$store.commit('setShop', null);
       this.$router.push({ name: 'City' });
@@ -268,6 +274,7 @@ export default {
     } else {
       this.shopData = this.$store.state.shop;
     }
+    console.log(this.shopData);
     if (this.shopData.link) {
       this.fetchProducts(this.shopData.link);
     } else {
@@ -401,6 +408,7 @@ export default {
         name: 'City',
         params: {
           cityLink: this.cityLink,
+          cityUid: this.cityUid,
         },
       });
     },

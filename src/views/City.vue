@@ -78,6 +78,7 @@ export default {
   props: {
     city: Object,
     cityLink: String,
+    cityUid: String,
   },
   components: {
     Card,
@@ -108,9 +109,9 @@ export default {
     },
   },
   async mounted() {
-    if (this.cityLink) {
+    if (this.cityUid) {
       await fetchCities.bind(this)();
-      this.cityData = this.cities.find((city) => city.link === this.cityLink);
+      this.cityData = this.cities.find((city) => city.uid === this.cityUid);
     } else if (window.hash !== this.$store.state.hash) {
       this.backToCitySelector();
       return;
@@ -145,7 +146,9 @@ export default {
         params: {
           shop,
           cityLink: this.cityData.link,
+          cityUid: this.cityData.uid,
           shopLink: shop.link,
+          shopUid: shop.uid,
         },
       });
     },

@@ -13,13 +13,13 @@ const routes = [
     component: Home,
   },
   {
-    path: '/:cityLink',
+    path: '/:cityUid',
     name: 'City',
     component: City,
     props: true,
   },
   {
-    path: '/:cityLink/:shopLink',
+    path: '/:cityUid/:shopUid',
     name: 'Shop',
     component: Shop,
     props: true,

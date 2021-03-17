@@ -79,12 +79,13 @@ export default {
     },
   },
   mounted() {
-    if (this.$store.state.city && this.$store.state.city.link) {
+    if (this.$store.state.city && this.$store.state.city.link && this.$store.state.city.uid) {
       this.$router.push({
         name: 'City',
         params: {
           city: this.$store.state.city,
           cityLink: this.$store.state.city.link,
+          cityUid: this.$store.state.city.uid,
         },
       });
     } else {
@@ -99,6 +100,7 @@ export default {
         params: {
           city,
           cityLink: this.$store.state.city.link,
+          cityUid: this.$store.state.city.uid,
         },
       });
     },
