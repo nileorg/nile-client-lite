@@ -70,7 +70,6 @@
 
 <script>
 import Card from '@/components/Card.vue';
-import hash from '@/hash';
 import fetchCities from '@/services/cities';
 import fetchShops from '@/services/shops';
 
@@ -112,7 +111,7 @@ export default {
     if (this.cityLink) {
       await fetchCities.bind(this)();
       this.cityData = this.cities.find((city) => city.link === this.cityLink);
-    } else if (hash !== this.$store.state.hash) {
+    } else if (window.hash !== this.$store.state.hash) {
       this.backToCitySelector();
       return;
     } else if (this.city) {
