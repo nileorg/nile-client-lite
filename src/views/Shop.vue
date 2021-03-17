@@ -274,7 +274,6 @@ export default {
     } else {
       this.shopData = this.$store.state.shop;
     }
-    console.log(this.shopData);
     if (this.shopData.link) {
       this.fetchProducts(this.shopData.link);
     } else {
