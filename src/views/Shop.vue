@@ -429,6 +429,9 @@ export default {
             },
             {
               title: 'No, stay on this shop',
+              handler: () => {
+                this.$modal.hide('dialog');
+              },
             },
           ],
         });
