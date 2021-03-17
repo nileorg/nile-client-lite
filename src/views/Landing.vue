@@ -6,20 +6,13 @@
       id="home"
       :style="`background-image: url('${require('../assets/home_hero.jpg')}');`"
     >
+      <img @click="backToCitySelector" class="go-back" src="@/assets/go-back-left-arrow.svg" />
       <div class="container">
         <div class="el-row">
           <div
             class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-12"
           >
-            <h1>Nile</h1>
-            <p>
-              Viviamo in una società in cui le grandi aziende hanno il potere di
-              influenzare le economie e le tendenze. Oggi le grandi aziende che
-              possiedono il mercato online non pagano le tasse, non pagano le
-              imposte, non pagano i loro dipendenti e stanno perturbando le
-              economie locali. Pensiamo che il mondo meriti un'alternativa
-              migliore, così decidiamo di fondare Nile
-            </p>
+            <h1>Come funziona Nile</h1>
           </div>
         </div>
       </div>
@@ -89,12 +82,12 @@
                 <br /><br />
                 <strong>Comunicazione privata e zero commissioni</strong>
                 <br /><br />
-                <a
+                <button
                   class="el-button el-button-sm el-button--primary"
-                  href="https://app.nile.shopping"
+                  @click="backToCitySelector()"
                 >
                   Entra in Nile
-                </a>
+                </button>
               </p>
             </div>
           </div>
@@ -333,7 +326,7 @@
                   La protezione dei dati e la privacy degli utenti è un
                   argomento enorme oggi. Le informazioni pubbliche sono
                   pubblicate su uno storage decentralizzato e tutti i dati
-                  privati dell'utente sono solo salvati solo sul suo
+                  privati dell'utente sono salvati solo sul suo
                   dispositivo. Un acquirente condivide le informazioni richieste
                   solo con il venditore coinvolto nell'ordine.
                 </p>
@@ -403,10 +396,19 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    backToCitySelector() {
+      this.$store.commit('setCity', null);
+      this.$router.push({ name: 'Home' });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.section--hero {
+  height: calc(100vh - 500px);
+}
 .card img {
   height: 180px;
   border-radius: 100%;

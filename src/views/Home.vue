@@ -10,6 +10,12 @@
           <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-12">
             <h1>{{$t('title')}}</h1>
             <p>{{$t('subtitle')}}</p>
+            <button
+              class="el-button el-button-sm"
+              @click="$router.push({ name: 'Landing' })"
+            >
+              {{$t('discoverMore')}}
+            </button>
           </div>
         </div>
       </div>
