@@ -429,6 +429,10 @@ export default {
   .el-col > .circle {
     display: none;
   }
+  .section--hero {
+    height: 40vh !important;
+    min-height: 40vh !important;
+  }
 }
 .center {
   text-align: center;

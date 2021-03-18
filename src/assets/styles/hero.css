@@ -98,9 +98,6 @@
         min-height: calc(100vh - 380px);
         height: auto;
     }
-    .section--hero .el-button {
-        display: none;
-    }
     .section--hero .earth-wrapper {
         height: 450px;
         width: 450px;
