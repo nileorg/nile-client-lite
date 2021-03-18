@@ -18,13 +18,14 @@
   "payOrderCash": "Pay order in cash",
   "payOrderCancel": "Back to payment methods",
   "cartSendOrderVia": "Send order via",
-  "accountTitle": "Enter your information",
+  "accountTitle": "Confirm your information",
+  "accountFooter": "All your information are saved only on your device",
   "accountFirstname": "Firstname",
   "accountLastname": "Lastname",
   "accountAddress": "Address",
   "accountPhone": "Phone",
   "accountNotes": "Notes",
   "accountRingbell": "Doorbell",
-  "accountClose": "Close",
+  "accountClose": "Confirm",
   "languageTitle": "Select language"
 }

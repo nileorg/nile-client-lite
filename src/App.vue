@@ -60,6 +60,9 @@
           :placeholder="$t('accountNotes')"
           v-model="$store.state.account.notes"
         />
+        <p>
+          <small style="color: rgb(134 133 133); font-weight: bold;">{{$t('accountFooter')}}</small>
+        </p>
         <button
           class="el-button el-button-sm el-button--primary card-button account-input"
           @click="() => {$modal.hide('account')}"

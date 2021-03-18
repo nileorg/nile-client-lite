@@ -18,13 +18,14 @@
   "payOrderCash": "Paga ordine in contanti",
   "payOrderCancel": "Torna ai metodi di pagamento",
   "cartSendOrderVia": "Invia ordine via",
-  "accountTitle": "Inserisci i tuoi dati",
+  "accountTitle": "Benvenuto su Nile, conferma i tuoi dati",
+  "accountFooter": "Tutte le tue informazioni sono salvate solo sul tuo dispositivo",
   "accountFirstname": "Nome",
   "accountLastname": "Cognome",
   "accountAddress": "Indirizzo",
   "accountPhone": "Telefono",
   "accountNotes": "Note",
   "accountRingbell": "Campanello",
-  "accountClose": "Chiudere",
+  "accountClose": "Conferma",
   "languageTitle": "Seleziona la lingua"
 }

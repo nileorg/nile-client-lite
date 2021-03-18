@@ -97,7 +97,12 @@
       </div>
     </modal>
     <modal
-      :styles="'border-radius: 10px; border: var(--border-lg); padding: 20px; text-align: center;'"
+      :styles="`
+        border-radius: 10px;
+        border: var(--border-lg);
+        padding: 20px;
+        text-align: center;
+      `"
       height="auto"
       width="320"
       name="cart"
@@ -260,15 +265,18 @@ export default {
     },
   },
   async mounted() {
+    if (this.$store.state.hash && window.hash !== this.$store.state.hash) {
+      this.$router.push({ name: 'City' });
+      return;
+    }
+    if (!this.cityLink) {
+      this.$modal.show('account');
+    }
     if (this.cityUid) {
       await fetchCities.bind(this)();
       const cityData = this.cities.find((city) => city.uid === this.cityUid);
       await fetchShops.bind(this)(cityData.link);
       this.shopData = this.shops.find((shop) => shop.uid === this.shopUid);
-    } else if (window.hash !== this.$store.state.hash) {
-      this.$store.commit('setShop', null);
-      this.$router.push({ name: 'City' });
-      return;
     } else if (this.shop) {
       this.shopData = this.shop;
     } else {
@@ -462,6 +470,11 @@ export default {
 </script>
 
 <style scoped>
+.vm--container {
+  overflow-y: scroll;
+  padding-bottom: 35px;
+  padding-top: 20px;
+}
 .tag-carousel-available {
   margin-top: 10px;
 }
