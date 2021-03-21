@@ -69,7 +69,7 @@
     </div>
     <button
       class="order-floating-button animation-target"
-      v-if="Object.keys($store.state.cart.orders).length > 0"
+      v-if="Object.keys(orders).length > 0"
       @click="goToCart"
     >
       <img src="@/assets/cart.svg" />
@@ -92,7 +92,7 @@
         />
         <button
           class="el-button el-button-sm el-button--primary card-button add-to-cart-button"
-          @click="() => addToCart(productQuantitySelector.name, productQuantitySelector.price, productQuantity)"
+          @click="() => addToCart(productQuantitySelector)"
         >{{$t('cartAdd')}}</button>
       </div>
     </modal>
@@ -109,10 +109,11 @@
     >
       <div v-if="$store.state.cart.shop">
         <h4>{{$t('cartTitle')}}</h4>
-        <div class="cart-item" v-for="(_, product) in $store.state.cart.orders" :key="product">
+        <div class="cart-item" v-for="product in orders" :key="product.name">
           <span style="font-size: 12px;">
-            {{product}} -
-            {{$store.state.cart.orders[product].quantity * $store.state.cart.orders[product].price}}€
+            {{product.name}} -
+            {{parseInt(product.quantity) * product.price}}
+            {{product.suffixTotal || '€'}}
           </span>
           <div class="quantity-selector-editor">
             <input
@@ -120,12 +121,12 @@
               value="1"
               min="1"
               class="add-to-cart-quantity"
-              v-model="$store.state.cart.orders[product].quantity"
+              v-model="product.quantity"
               @change="() => $store.commit('saveOrder')"
             />
             <button
               class="el-button el-button-sm el-button--danger card-button remove-from-cart-button"
-              @click="() => deleteFromCart(product)"
+              @click="() => deleteFromCart(product.name)"
             >
               <img src="@/assets/bin.svg" />
             </button>
@@ -236,7 +237,7 @@ export default {
       const { orders } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
       for (const product in orders) {
-        if (orders[product]) {
+        if (orders[product] && !orders[product].excludeFromTotal) {
           const { quantity, price } = orders[product];
           total += price * quantity;
         }
@@ -262,6 +263,9 @@ export default {
         address += `${storeState.account.notes}`;
       }
       return address || this.$t('cartWarningEmptyAccount');
+    },
+    orders() {
+      return this.$store.state.cart.orders;
     },
   },
   async mounted() {
@@ -292,20 +296,8 @@ export default {
     }
   },
   methods: {
-    calculateTotal() {
-      let total = 0;
-      const { orders } = this.$store.state.cart;
-      /* eslint-disable-next-line no-restricted-syntax */
-      for (const product in orders) {
-        if (orders[product]) {
-          const { quantity, price } = orders[product];
-          total += price * quantity;
-        }
-      }
-      return total;
-    },
     payOrder(type, value) {
-      const total = this.calculateTotal();
+      const total = this.totalPrice;
       switch (type) {
         case 'satispay':
           window.open(
@@ -318,14 +310,16 @@ export default {
     },
     sendOrder(type, contact) {
       let formattedText = '';
-      const total = this.calculateTotal();
+      const total = this.totalPrice;
       const { orders, notes } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
       for (const product in orders) {
         if (orders[product]) {
-          const { quantity, price } = orders[product];
-          formattedText += `${quantity} x ${product} - ${price}€ = ${price
-            * quantity}€%0A`;
+          const {
+            quantity, price, suffixSingle, suffixTotal, name,
+          } = orders[product];
+          formattedText += `${quantity} x ${name} - ${price} ${suffixSingle || '€'} = ${price
+            * quantity} ${suffixTotal || '€'}%0A`;
         }
       }
       formattedText += `${notes}`;
@@ -370,17 +364,18 @@ export default {
       }
     },
     getButtonAction(product) {
-      if (Object.keys(this.$store.state.cart.orders).includes(product.name)) {
+      if (this.orders.find((p) => p.name === product.name)) {
         return { label: this.$t('cartEdit'), click: () => this.goToCart() };
       }
       return {
-        label: `${product.price}€ ${this.$t('cartAdd')}`,
+        label: `${product.price} ${product.suffixSingle || '€'} ${this.$t('cartAdd')}`,
         click: () => this.openProductQuantitySelector(product),
       };
     },
     deleteFromCart(product) {
-      this.$delete(this.$store.state.cart.orders, product);
-      if (Object.keys(this.$store.state.cart.orders).length === 0) {
+      this.$store.commit('deleteOrder', { product });
+      this.$store.commit('saveOrder');
+      if (Object.keys(this.orders).length === 0) {
         this.$modal.hide('cart');
       }
     },
@@ -392,11 +387,17 @@ export default {
       this.productQuantitySelector = product;
       this.$modal.show('product-quantity-selector');
     },
-    addToCart(name, price, quantity) {
+    addToCart(product) {
+      const order = {
+        quantity: parseInt(this.productQuantity, 10),
+        name: product.name,
+        suffixSingle: product.suffixSingle || '€',
+        suffixTotal: product.suffixTotal || '€',
+        price: product.price,
+        excludeFromTotal: product.excludeFromTotal,
+      };
       this.$store.commit('addToCart', {
-        name,
-        price,
-        quantity,
+        product: order,
         shop: this.shopData.uid,
       });
       this.$modal.hide('product-quantity-selector');
@@ -423,7 +424,7 @@ export default {
       });
     },
     backToCity() {
-      if (Object.keys(this.$store.state.cart.orders).length === 0) {
+      if (Object.keys(this.orders).length === 0) {
         this.leaveShop();
       } else {
         this.$modal.show('dialog', {

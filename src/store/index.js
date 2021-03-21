@@ -16,7 +16,7 @@ export default new Vuex.Store({
     shop: {},
     cart: {
       shop: '',
-      orders: {},
+      orders: [],
       notes: '',
     },
     account: {
@@ -27,6 +27,7 @@ export default new Vuex.Store({
       notes: '',
       phone: '',
     },
+    changes: 0,
   },
   mutations: {
     setHash(state, hash) {
@@ -43,23 +44,23 @@ export default new Vuex.Store({
     },
     addToCart(state, order) {
       Vue.set(state.cart, 'shop', order.shop);
-      Vue.set(state.cart.orders, order.name, {
-        price: order.price,
-        quantity: order.quantity,
-      });
+      state.cart.orders.push(order.product);
     },
     emptyCart(state) {
       state.cart = {
         shop: '',
-        orders: {},
+        orders: [],
         notes: '',
       };
     },
-    saveAccount() {
-      //
+    saveAccount(state) {
+      state.changes += 1;
     },
-    saveOrder() {
-      //
+    saveOrder(state) {
+      state.changes += 1;
+    },
+    deleteOrder(state, { product }) {
+      state.cart.orders = state.cart.orders.filter((p) => p.name !== product);
     },
   },
   plugins: [vuexLocal.plugin],

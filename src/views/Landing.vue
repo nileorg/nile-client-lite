@@ -6,7 +6,11 @@
       id="home"
       :style="`background-image: url('${require('../assets/home_hero.jpg')}');`"
     >
-      <img @click="backToCitySelector" class="go-back" src="@/assets/go-back-left-arrow.svg" />
+      <img
+        @click="backToCitySelector"
+        class="go-back"
+        src="@/assets/go-back-left-arrow.svg"
+      />
       <div class="container">
         <div class="el-row">
           <div
@@ -54,18 +58,26 @@
                 <h3>Negozio</h3>
                 <p>
                   Pubblicare il tuo negozio su Nile è semplice, basta inviarci
-                  il tuo menù.<br />
-                  Un solo costo iniziale di 349€.
-                  <br /><br />
-                  <strong>Ogni modifica al menù, ogni ordine: gratuito.</strong>
-                  <br /><br />
-                  <a
-                    class="el-button el-button-sm el-button--primary"
-                    href="mailto:hello@nile.shopping?subject=Richesta%20iscrizione&body=Includere%20nella%20email%3A%20Nome%2C%20Descrizione%2C%20Immagine%20di%20copertina%2C%20Logo%2C%20Contatto%20telefonico%2C%20Account%20Satispay"
-                  >
-                    Unisciti a Nile
-                  </a>
+                  il tuo menù.<br /><br />
+                  Un costo d'iscrizione iniziale di <b>349€</b>.<br />
                 </p>
+                <small style="text-align: left">
+                  Per ogni modifica o aggiunta al menù:
+                  <ul style="text-align: left; margin-top: 5px">
+                    <li>Tramite <a>modulo standard</a>: <b>9.90€</b></li>
+                    <li>
+                      Inviando il nuovo menù (qualsiasi formato): <b>44.90€</b>
+                    </li>
+                  </ul>
+                </small>
+                <strong>Zero commissioni</strong>
+                <br /><br />
+                <a
+                  class="el-button el-button-sm el-button--primary"
+                  href="mailto:hello@nile.shopping?subject=Richesta%20iscrizione&body=Includere%20nella%20email%3A%20Nome%2C%20Descrizione%2C%20Immagine%20di%20copertina%2C%20Logo%2C%20Contatto%20telefonico%2C%20Account%20Satispay"
+                >
+                  Unisciti a Nile
+                </a>
               </div>
             </div>
           </div>
@@ -167,12 +179,19 @@
                     <i
                       class="el-collapse-item__header__arrow el-icon-arrow-right"
                     ></i>
-                    <h4><span class="counter">3</span>Consegna la merce</h4>
+                    <h4>
+                      <span class="counter">3</span>
+                      Consegna i prodotti al cliente
+                    </h4>
                   </div>
                   <div>
                     <div class="el-collapse-item__wrap">
                       <div class="el-collapse-item__content">
-                        <div>Nile non include un servizio di consegna.</div>
+                        <div>
+                          In base alla modalità di consegna scelta (d'asporto o
+                          domicilio) evadi l'ordine ricevuto. Nile non include
+                          un servizio di consegna.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -326,9 +345,9 @@
                   La protezione dei dati e la privacy degli utenti è un
                   argomento enorme oggi. Le informazioni pubbliche sono
                   pubblicate su uno storage decentralizzato e tutti i dati
-                  privati dell'utente sono salvati solo sul suo
-                  dispositivo. Un acquirente condivide le informazioni richieste
-                  solo con il venditore coinvolto nell'ordine.
+                  privati dell'utente sono salvati solo sul suo dispositivo. Un
+                  acquirente condivide le informazioni richieste solo con il
+                  venditore coinvolto nell'ordine.
                 </p>
               </div>
             </div>
