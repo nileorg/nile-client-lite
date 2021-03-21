@@ -9,6 +9,7 @@
   "cartTitle": "Your order",
   "cartAdd": "Add",
   "cartEdit": "Edit",
+  "deliveryPrice": "Delivery price: ",
   "cartTotal": "Total",
   "cartNotes": "Notes",
   "cartEditAddress": "Edit address",

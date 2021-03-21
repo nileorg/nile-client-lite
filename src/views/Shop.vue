@@ -134,7 +134,7 @@
         <div class="cart-item" v-for="product in orders" :key="product.name">
           <span style="font-size: 12px">
             {{ product.name }} -
-            {{ parseInt(product.quantity) * product.price }}
+            {{ parseFloat(product.quantity) * product.price }}
             {{ product.suffixTotal || "€" }}
           </span>
           <div class="quantity-selector-editor">
@@ -160,6 +160,7 @@
           v-model="$store.state.cart.notes"
           @change="() => $store.commit('saveOrder')"
         ></textarea>
+        <p v-if="shopData.deliveryPrice">{{ $t("deliveryPrice") }} <b>{{shopData.deliveryPrice}}€</b></p>
         <b>{{ $t("cartTotal") }}: {{ totalPrice }}€</b>
         <br />
         <p v-html="address"></p>
@@ -266,7 +267,7 @@ export default {
       return chunk(this.productsFiltered, 4);
     },
     totalPrice() {
-      let total = 0;
+      let total = this.shopData.deliveryPrice || 0;
       const { orders } = this.$store.state.cart;
       /* eslint-disable-next-line no-restricted-syntax */
       for (const product in orders) {
@@ -425,7 +426,7 @@ export default {
     },
     addToCart(product) {
       const order = {
-        quantity: parseInt(this.productQuantity, 10),
+        quantity: parseFloat(this.productQuantity),
         name: product.name,
         suffixSingle: product.suffixSingle || '€',
         suffixTotal: product.suffixTotal || '€',
