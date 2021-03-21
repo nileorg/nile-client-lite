@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import City from '@/views/City.vue';
 import Shop from '@/views/Shop.vue';
 import Landing from '@/views/Landing.vue';
+import Order from '@/views/Order.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,12 @@ const routes = [
     path: '/landing',
     name: 'Landing',
     component: Landing,
+  },
+  {
+    path: '/order/:orderHash',
+    name: 'Order',
+    component: Order,
+    props: true,
   },
   {
     path: '/:cityUid',

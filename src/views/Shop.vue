@@ -354,48 +354,54 @@ export default {
           ];
           formattedText += `${quantity} x ${name} - ${price} ${
             suffixSingle || '€'
-          } = ${price * quantity} ${suffixTotal || '€'}%0A`;
+          } = ${price * quantity} ${suffixTotal || '€'}\n`;
         }
       }
       formattedText += `${notes}`;
-      formattedText += `%0A${this.$t('cartTotal')}: ${total}€%0A`;
+      formattedText += `\n${this.$t('cartTotal')}: ${total}€\n`;
       const storeState = this.$store.state;
       if (storeState.account) {
         if (storeState.account.address) {
           formattedText += `${this.$t('accountAddress')}: ${
             storeState.account.address
-          }%0A`;
+          }\n`;
         }
         if (storeState.account.doorbell) {
           formattedText += `${this.$t('accountRingbell')}: ${
             storeState.account.doorbell
-          }%0A`;
+          }\n`;
         }
         if (storeState.account.phone) {
           formattedText += `${this.$t('accountPhone')}: ${
             storeState.account.phone
-          }%0A`;
+          }\n`;
         }
         if (storeState.account.notes) {
           formattedText += `${this.$t('accountNotes')}: ${
             storeState.account.notes
-          }%0A`;
+          }\n`;
         }
       }
+
+      const formattedTextMessage = formattedText.replace('\n', '%0A');
+
+      const orderBase64 = Buffer.from(formattedText).toString('base64');
+      const link = encodeURIComponent(`https://app.nile.shopping/#/order/${orderBase64}`);
+
       switch (type) {
         case 'whatsapp':
           window.open(
-            `https://api.whatsapp.com/send?phone=${contact}&text=${formattedText}`,
+            `https://api.whatsapp.com/send?phone=${contact}&text=${formattedTextMessage}%0A%0ASalva l'ordine: ${link}`,
           );
           break;
         case 'sms':
-          window.open(`sms:${contact}?&body=${formattedText}`);
+          window.open(`sms:${contact}?&body=${link}`);
           break;
         case 'call':
           window.open(`tel:${contact}`);
           break;
         default:
-          this.$clipboard(formattedText);
+          this.$clipboard(link);
       }
     },
     getButtonAction(product) {
