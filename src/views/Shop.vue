@@ -6,7 +6,11 @@
         class="section section--hero section--hero__sm"
         :style="{ backgroundImage: `url('${shopData.image}')` }"
       >
-        <img @click="backToCity" class="go-back" src="@/assets/go-back-left-arrow.svg" />
+        <img
+          @click="backToCity"
+          class="go-back"
+          src="@/assets/go-back-left-arrow.svg"
+        />
         <div class="container">
           <div class="avatar-container">
             <img alt="vendor avatar" :src="shopData.logo" />
@@ -19,17 +23,24 @@
       <div class="container">
         <div class="el-row">
           <div class="el-col el-col-24 el-col-xs-24 city-selector">
-            <h3>{{shopData.name}}</h3>
-            <p>{{shopData.description}}</p>
+            <h3>{{ shopData.name }}</h3>
+            <p>{{ shopData.description }}</p>
           </div>
         </div>
         <hr />
         <div class="el-row">
           <div class="el-col el-col-24">
-            <p style="margin: 0; font-size: 13px;">{{$t('tagFilterProducts')}}</p>
+            <p style="margin: 0; font-size: 13px">
+              {{ $t("tagFilterProducts") }}
+            </p>
             <carousel
               class="tag-carousel-available"
-              :perPageCustom="[[0, 3], [768, 6], [1024, 7], [1240, 8]]"
+              :perPageCustom="[
+                [0, 3],
+                [768, 6],
+                [1024, 7],
+                [1240, 8],
+              ]"
               :paginationEnabled="false"
             >
               <slide v-for="(tag, index) in tags" :key="`tag-${index}`">
@@ -37,10 +48,12 @@
                   class="el-button el-button-sm tag-carousel-slide"
                   :class="{
                     'el-button--success': activeTags.includes(tag),
-                    'el-button--primary': !activeTags.includes(tag)
+                    'el-button--primary': !activeTags.includes(tag),
                   }"
                   @click="() => toggleTag(tag)"
-                >{{tag}}</button>
+                >
+                  {{ tag }}
+                </button>
               </slide>
             </carousel>
           </div>
@@ -55,7 +68,7 @@
             v-for="(product, index) in productsFiltered"
             :key="index"
             class="el-col el-col-6 el-col-xs-24"
-            style="padding: 10px;"
+            style="padding: 10px"
           >
             <Card
               :title="product.name"
@@ -81,8 +94,15 @@
       name="product-quantity-selector"
     >
       <div v-if="productQuantitySelector">
-        <h4>{{productQuantitySelector.name}}</h4>
-        <p>{{productQuantitySelector.description}}</p>
+        <h4>{{ productQuantitySelector.name }}</h4>
+        <p>{{ productQuantitySelector.description }}</p>
+        <p>
+          {{ productQuantitySelector.price }}
+          {{ productQuantitySelector.suffixSingle || '€'}} *
+          {{ productQuantity }} =
+          {{ productQuantitySelector.price * productQuantity }}
+          {{ productQuantitySelector.suffixTotal || "€" }}
+        </p>
         <input
           type="number"
           value="1"
@@ -93,7 +113,9 @@
         <button
           class="el-button el-button-sm el-button--primary card-button add-to-cart-button"
           @click="() => addToCart(productQuantitySelector)"
-        >{{$t('cartAdd')}}</button>
+        >
+          {{ $t("cartAdd") }}
+        </button>
       </div>
     </modal>
     <modal
@@ -108,12 +130,12 @@
       name="cart"
     >
       <div v-if="$store.state.cart.shop">
-        <h4>{{$t('cartTitle')}}</h4>
+        <h4>{{ $t("cartTitle") }}</h4>
         <div class="cart-item" v-for="product in orders" :key="product.name">
-          <span style="font-size: 12px;">
-            {{product.name}} -
-            {{parseInt(product.quantity) * product.price}}
-            {{product.suffixTotal || '€'}}
+          <span style="font-size: 12px">
+            {{ product.name }} -
+            {{ parseInt(product.quantity) * product.price }}
+            {{ product.suffixTotal || "€" }}
           </span>
           <div class="quantity-selector-editor">
             <input
@@ -138,33 +160,44 @@
           v-model="$store.state.cart.notes"
           @change="() => $store.commit('saveOrder')"
         ></textarea>
-        <b>{{$t('cartTotal')}}: {{totalPrice}}€</b>
+        <b>{{ $t("cartTotal") }}: {{ totalPrice }}€</b>
         <br />
         <p v-html="address"></p>
         <span
           class="button-text"
-          @click="() => {$modal.hide('cart'); $modal.show('account')}"
-        >{{$t('cartEditAddress')}}</span>
+          @click="
+            () => {
+              $modal.hide('cart');
+              $modal.show('account');
+            }
+          "
+          >{{ $t("cartEditAddress") }}</span
+        >
         <div v-if="!payed">
           <p>
-            {{$t('payOrderInstruction')}}
+            {{ $t("payOrderInstruction") }}
           </p>
           <button
             v-for="(method, index) in shopData.paymentMethods"
             :key="index"
             class="el-button el-button-sm el-button--primary card-button send-order-button"
-            @click="() => {payOrder(method.type, method.value)}"
+            @click="
+              () => {
+                payOrder(method.type, method.value);
+              }
+            "
           >
-            {{method.type === 'cash' ? $t('payOrderCash') : `${$t('payOrderVia')} ${method.type}`}}
+            {{
+              method.type === "cash"
+                ? $t("payOrderCash")
+                : `${$t("payOrderVia")} ${method.type}`
+            }}
           </button>
         </div>
         <div v-else>
           <p>
-            <span
-              class="button-text"
-              @click="() => payed=false"
-            >
-              {{$t('payOrderCancel')}}
+            <span class="button-text" @click="() => (payed = false)">
+              {{ $t("payOrderCancel") }}
             </span>
           </p>
           <button
@@ -173,7 +206,7 @@
             class="el-button el-button-sm el-button--primary card-button send-order-button"
             @click="() => sendOrder(contact.type, contact.value)"
           >
-            {{$t('cartSendOrderVia')}} {{contact.type}}
+            {{ $t("cartSendOrderVia") }} {{ contact.type }}
           </button>
         </div>
       </div>
@@ -300,9 +333,7 @@ export default {
       const total = this.totalPrice;
       switch (type) {
         case 'satispay':
-          window.open(
-            `https://tag.satispay.com/${value}/${total}`,
-          );
+          window.open(`https://tag.satispay.com/${value}/${total}`);
           break;
         default:
       }
@@ -317,9 +348,12 @@ export default {
         if (orders[product]) {
           const {
             quantity, price, suffixSingle, suffixTotal, name,
-          } = orders[product];
-          formattedText += `${quantity} x ${name} - ${price} ${suffixSingle || '€'} = ${price
-            * quantity} ${suffixTotal || '€'}%0A`;
+          } = orders[
+            product
+          ];
+          formattedText += `${quantity} x ${name} - ${price} ${
+            suffixSingle || '€'
+          } = ${price * quantity} ${suffixTotal || '€'}%0A`;
         }
       }
       formattedText += `${notes}`;
@@ -368,7 +402,9 @@ export default {
         return { label: this.$t('cartEdit'), click: () => this.goToCart() };
       }
       return {
-        label: `${product.price} ${product.suffixSingle || '€'} ${this.$t('cartAdd')}`,
+        label: `${product.price} ${product.suffixSingle || '€'} ${this.$t(
+          'cartAdd',
+        )}`,
         click: () => this.openProductQuantitySelector(product),
       };
     },
